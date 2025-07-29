@@ -1,0 +1,166 @@
+<div class="container">
+    <div class="mainContainer" [class.blurred]="showEditPanel">
+        <h2>My Bookings <span (click)="BookNewTicket()">Book New Ticket <i
+                    class="fa-solid fa-square-up-right"></i></span>
+        </h2>
+        <div class="divider"></div>
+        <div class="tabs">
+            <button class="tab" [class.active]="activeTab === 'upcoming'"
+                (click)="setActiveTab('upcoming')">Upcoming</button>
+            <button class="tab" [class.active]="activeTab === 'completed'"
+                (click)="setActiveTab('completed')">Completed</button>
+            <button class="tab" [class.active]="activeTab === 'cancelled'"
+                (click)="setActiveTab('cancelled')">Cancelled</button>
+        </div>
+    </div>
+
+
+    <div class="bookings" [class.blurred]="showEditPanel" [class.lock-scroll]="showEditPanel">
+        <div *ngFor="let booking of displayedBookings; let i = index" class="bookingsCard">
+            <div class="bookingHeader">
+                <div class="passengerHeader">
+                    <h3>Booking ID: #{{ booking.bookingId }}</h3>
+                    <div class="menu" [class.show]="openedBookingMenuIndex === i" *ngIf="activeTab == 'upcoming'">
+                        <button class="menuBtn" (click)="toggleBookingMenu(i, $event)">⋮</button>
+                        <div class="menuDropdown">
+                            <button (click)="downloadTicket(booking.bookingId)">Download Ticket</button>
+                            <button (click)="cancelBooking(booking.bookingId)">Cancel Booking</button>
+                        </div>
+                    </div>
+                </div>
+
+                <p>{{ booking.busSchedule.busName }} | {{ booking.busSchedule.vendorName }}</p>
+                <p>{{ booking.busSchedule.fromLocation }} - {{ booking.busSchedule.toLocation }}</p>
+                <p>{{booking.busSchedule.departureDateTime | date: 'MMM d, y - HH:mm a'}} -
+                    {{booking.busSchedule.arrivalDateTime | date: 'MMM d, y - HH:mm a'}} </p>
+                <p>Booking Date: {{ booking.bookingDate | date: 'MMM d, y - HH:mm a' }}</p>
+                <p>Total Price: {{ booking.totalPrice | currency: 'INR' }}</p>
+                <p>
+                    Status:
+                    <span class="status"
+                        [ngClass]="{ confirmed: booking.paymentStatus === 'Confirmed', pending: booking.paymentStatus === 'Pending' }">
+                        {{ booking.paymentStatus }}
+                    </span>
+                </p>
+            </div>
+
+            <div class="passengerList">
+                <div *ngFor="let p of booking.busBookingPassengers; let j = index" class="passengerCard">
+                    <div class="passengerHeader">
+                        <h4>{{ p.passengerName }} ({{ p.seatNo }})</h4>
+                    </div>
+                    <p>Age: {{ p.age }} | Gender: {{ p.gender }}</p>
+                    <p>Mobile: {{ p.mobileNo }}</p>
+                    <p>Price: {{ p.price | currency: 'INR' }}</p>
+                    <p>
+                        Status:
+                        <span class="status"
+                            [ngClass]="{ booked: p.bookingStatus.toLowerCase() === 'booked', cancelled: p.bookingStatus.toLowerCase() === 'cancelled' }">
+
+                            <ng-container *ngIf="p.bookingStatus.toLowerCase() === 'cancelled'; else normalStatus">
+                                <s>Cancelled</s> &nbsp;|&nbsp;
+                                <ng-container *ngIf="p.refundStatus.toLowerCase()==='initiated'; else refStatus">
+                                    Refund Initiated of {{ p.refundableAmount | currency: 'INR' }}
+                                </ng-container>
+                            </ng-container>
+                            <ng-template #normalStatus>
+                                {{ p.bookingStatus }}
+                            </ng-template>
+                            <ng-template #refStatus>
+                                Refunded
+                            </ng-template>
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="editPanel" [class.visible]="showEditPanel">
+        <div class="editPanelHeader">
+            <h3>Cancel Booking: #{{ selectedBooking?.bookingId }}</h3>
+            <button class="closeBtn" (click)="closeEditPanel()">✕</button>
+        </div>
+
+        <div class="editPanelContent">
+
+
+            <p><strong>Booking Date:</strong> {{ selectedBooking?.bookingDate | date: 'MMM d, y - HH:mm a'}}</p>
+
+            <div class="divider"></div>
+
+
+            <p><strong>
+                    {{ selectedBooking?.busSchedule?.fromLocation }} - {{
+                    selectedBooking?.busSchedule?.toLocation }}
+                </strong></p>
+            <p><strong>{{ selectedBooking?.busSchedule?.busName}} - {{selectedBooking?.busSchedule?.vendorName}}
+                </strong>
+            </p>
+            <p><strong>
+                    {{ selectedBooking?.busSchedule?.departureDateTime | date: 'MMM d, y - HH:mm a' }} - {{
+                    selectedBooking?.busSchedule?.arrivalDateTime | date: 'MMM d, y - HH:mm a' }}
+                </strong>
+            </p><br>
+
+            <h4>Select Ticket(s) to Cancel:</h4>
+            <input type="checkbox" [(ngModel)]="selectAllChecked" (change)="toggleSelectAll()" />
+            <label style="font-weight: normal;">Select All</label>
+            <div class="divider"></div>
+
+            <div class="cancelTicketList">
+                <ng-container *ngFor="let p of selectedBooking?.busBookingPassengers">
+                    <div class="cancelTicketListPassenger" *ngIf="p.bookingStatus.toLowerCase() !== 'cancelled'">
+                        <div class="checkBox">
+                            <input type="checkbox" [(ngModel)]="p.selected" (change)="updateSelectAllState()" />
+                            <h4>{{ p.passengerName }} ({{ p.seatNo }})</h4>
+                        </div>
+                        <label>Age: {{ p.age }} | Gender: {{ p.gender }}</label>
+                        <label>Mobile: {{ p.mobileNo }}</label>
+                        <label>
+                            Refund Amount: {{ p.price | currency: 'INR' }}
+                        </label>
+                    </div>
+                </ng-container>
+
+                <div class="divider"></div>
+                <div class="disclosure">
+                    <div class="consent">
+                        <input type="checkbox" [(ngModel)]="consentCheckBox" />
+                        <h4>Confirm</h4>
+                    </div>
+                    <div class="totalAmount">
+                        <p><strong>Total Amount:&nbsp;&nbsp;</strong> {{totalAmount() | currency: 'INR'}}</p>
+                        <p><strong>Extra Charges (18% GST + 5% Fee):&nbsp;&nbsp;</strong>{{extraCharges() | currency:
+                            'INR'}}
+                        </p>
+                        <div class="divider"></div>
+                        <p><strong>Total Refundable Amount:&nbsp;&nbsp;</strong> {{totalRefundableAmount() | currency:
+                            'INR'}}
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <button class="confirmBtn" [disabled]="noPassengersSelected" (click)="confirmCancel()">Confirm
+                Cancel</button>
+
+
+            <div class="notice">
+                <div class="noticeHeader">
+                    *Note
+                </div>
+                <div class="noticeBody">
+                    <ol>
+                        <li>Refund will be processed within 3 working days after cancellation.</li>
+                        <li>Refund will be credited to the same payment method used for booking.</li>
+                        <li>Refund amount may vary based on the cancellation policy of the bus operator.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

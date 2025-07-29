@@ -1,0 +1,135 @@
+<!-- <div class="container">
+    <div class="selectBus">
+        <div class="header">
+            <h1>Select Your Bus</h1>
+            <div class="divider"></div>
+        </div>
+        <div class="selectBusContent">
+
+        </div>
+    </div>
+    <div class="bookingsOfBus">
+        <div class="header">
+
+        </div>
+        <div class="bookingContent">
+
+        </div>
+    </div>
+</div> -->
+
+<!-- <div class="container">
+    <div class="selectBus">
+        <div class="header">
+            <h1>Select Your Bus</h1>
+            <div class="divider"></div>
+        </div>
+        <div class="selectBusContent">
+            <select [(ngModel)]="selectedBusId" (change)="onBusChange($event)">
+                <option [ngValue]="null" disabled>Select a Bus</option>
+                <option *ngFor="let bus of buses" [value]="bus.id">{{ bus.busName }}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="bookingsOfBus" *ngIf="bookings.length > 0">
+        <div class="header">
+            <h2>Bookings for Selected Bus</h2>
+            <div class="divider"></div>
+        </div>
+        <div class="bookingContent">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Passenger Name</th>
+                        <th>Email</th>
+                        <th>Seats</th>
+                        <th>Booking Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let booking of bookings">
+                        <td>{{ booking.name }}</td>
+                        <td>{{ booking.email }}</td>
+                        <td>{{ booking.totalSeats }}</td>
+                        <td>{{ booking.bookingDate | date: 'short' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> -->
+
+
+<!-- 
+<div class="container">
+    <label for="busSelect">Select a Bus:</label>
+    <select id="busSelect" [(ngModel)]="selectedBusId" (change)="onBusChange($event)">
+        <option *ngFor="let bus of buses" [value]="bus.busId">
+            {{ bus.busName }} - {{ bus.busVehicleNo }}
+        </option>
+    </select>
+
+    <table class="booking-table" *ngIf="passengers.length > 0">
+        <thead>
+            <tr class="booking-header">
+                <th>Passenger Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Seat No</th>
+                <th>Mobile No</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let passenger of passengers" class="booking-row">
+                <td>{{ passenger.passengerName }}</td>
+                <td>{{ passenger.age }}</td>
+                <td>{{ passenger.gender }}</td>
+                <td>{{ passenger.seatNo }}</td>
+                <td>{{ passenger.mobileNo }}</td>
+                <td>₹{{ passenger.price }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="bookings.length === 0 && selectedBusId" class="no-data">
+        No bookings found for the selected bus.
+    </div>
+</div> -->
+
+<div class="container">
+    <label for="busSelect">Select a Bus:</label>
+    <select id="busSelect" [(ngModel)]="selectedBusId" (change)="onBusChange($event)">
+        <option *ngFor="let bus of buses" [value]="bus.busId">
+            {{bus.scheduleId}} - {{ bus.busName }} - {{ bus.busVehicleNo }}
+        </option>
+    </select>
+
+    <table class="booking-table" *ngIf="passengers.length > 0">
+        <thead>
+            <tr class="booking-header">
+                <th class="firstTH">Passenger Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Seat No</th>
+                <th>Mobile No</th>
+                <th class="lastTH">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let passenger of passengers" class="booking-row">
+                <td>{{ passenger.passengerName }}</td>
+                <td>{{ passenger.age }}</td>
+                <td>{{ passenger.gender }}</td>
+                <td>{{ passenger.seatNo }}</td>
+                <td>{{ passenger.mobileNo }}</td>
+                <td>₹{{ passenger.price }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="passengers.length === 0 && selectedBusId" class="no-data">
+        No bookings found for the selected bus.
+    </div>
+</div>

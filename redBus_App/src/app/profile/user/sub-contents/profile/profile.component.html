@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="header">
+        Manage Profile
+    </div>
+    <div class="divider"></div>
+    <div class="profileSettings">
+        <div class="profileDialog">
+            Handle your profile in one click
+            <span>*Remember, changing profile details will not apply any changes for the tickets you have already
+                purchased.
+                <br> *Changes will only be applied from the next booking.</span>
+        </div>
+
+        <div class="options">
+            <div class="menu">
+                Name
+            </div>
+            <div class="editMenu">
+                <input type="text" class="inputEditMenus" disabled [(ngModel)]="user.fullName">
+            </div>
+        </div>
+
+        <div class="options">
+            <div class="menu">
+                Email
+            </div>
+            <div class="editMenu">
+                <input type="text" class="inputEditMenus" disabled [(ngModel)]="user.emailId">
+            </div>
+        </div>
+
+        <div class="options">
+            <div class="menu">
+                Mobile No
+            </div>
+            <div class="editMenu">
+                <input type="text" class="inputEditMenus" [(ngModel)]="user.mobileNo">
+            </div>
+        </div>
+
+        <div class="options">
+            <div class="menu">
+                Gender
+            </div>
+            <div class="editMenu">
+                <input type="option" class="inputEditMenus" [(ngModel)]="user.gender">
+            </div>
+        </div>
+
+        <div class="btnUpdate">
+            <button class="updateBtn" (click)="handleUpdateUserProfile()" type="button">Update</button>
+        </div>
+    </div>
+</div>

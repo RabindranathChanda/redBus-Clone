@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body,
+input,
+select,
+button,
+label {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+    height: 100vh;
+    background-color: #eee;
+    display: flex;
+    padding: 20px;
+    align-content: center;
+    justify-content: center;
+
+}
+
+.register {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    background-color: #fff;
+    width: 70%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    border-radius: 30px;
+}
+
+.left,
+.right {
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.left {
+    width: 45%;
+}
+
+.right {
+    width: 55%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+
+
+.btn.social {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.google {
+    background-color: #eee;
+}
+
+.google:hover,
+.facebook:hover {
+    background-color: rgba(100, 148, 237, 0.199);
+}
+
+.facebook {
+    background-color: #eee;
+}
+
+.btn.social img {
+    width: 20px;
+    height: 20px;
+}
+
+
+
+.toggle-btn {
+    position: absolute;
+    top: 50.7rem;
+    right: 29rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.img2 {
+    width: 5rem;
+}
+
+.divider {
+    margin: 1rem 0;
+    position: relative;
+    text-align: center;
+}
+
+.divider span {
+    background: white;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 1;
+    color: #aaa;
+}
+
+.divider::before {
+    content: "";
+    height: 1px;
+    width: 100%;
+    background: #ccc;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: 0;
+}
+
+form {
+    padding-top: 0rem;
+    padding-left: 9rem;
+    padding-right: 9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+form div input,
+form div select {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 2rem;
+    background-color: #fff;
+}
+
+form div select {
+    height: 2.4rem;
+}
+
+form button {
+    height: 2.3rem;
+    border: none;
+    background-color: #d13d3d;
+    border-radius: 5px;
+    color: #fff;
+    font-size: large;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+form small {
+    color: #d13d3d;
+}
+
+
+
+@media (max-width: 800px) {
+    form {
+        padding: 0rem;
+    }
+
+    .container {
+        height: 97vh;
+    }
+
+    .right {
+        padding-right: 20px;
+        height: 100%;
+    }
+
+    .toggle-btn {
+        top: 51.15rem;
+        right: 9.9rem;
+    }
+}
+
+@media (max-width: 1600px) {
+    form {
+        padding: 0rem;
+    }
+
+    .container {
+        height: 97vh;
+    }
+
+    .right {
+        padding-right: 20px;
+        height: 100%;
+    }
+
+    .toggle-btn {
+        top: 51.15rem;
+        right: 11.5rem;
+    }
+}
