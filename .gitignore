@@ -18,17 +18,16 @@ redBus_App/.vscode/
 redBus_App/package-lock.json
 redBus_App/npm-debug.log
 redBus_App/.env
+redBus_App/localhost.csr
+redBus_App/localhost.key
+redBus_App/localhost.crt
 
 # === Othere & OS & Editor Files ===
 .DS_Store
 Thumbs.db
-DB -- Structure
-db Structure
-CreateDbTableStructure.sql
-Records to Test Apis -----
-redBus -- ApiStructure
-RetriveData.sql
-TestCases.sql
+*.ini
+*.txt
+*.sql
 
 # === Git ===
 *.swp

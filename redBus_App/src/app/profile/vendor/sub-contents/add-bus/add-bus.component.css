@@ -1,0 +1,524 @@
+.bus {
+    padding: 30px;
+}
+
+.divider {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    height: 2px;
+    width: 100%;
+    background-color: #ddd;
+}
+
+.addBusButton {
+    border: 5px dashed rgb(241, 65, 65);
+    color: rgb(241, 65, 65);
+    border-radius: 30px;
+    height: 15rem;
+    width: 25rem;
+    align-content: center;
+    text-align: center;
+    cursor: pointer;
+    background-color: transparent;
+    transition: all 100ms ease-in;
+    font-size: 40px;
+    margin: 1rem;
+}
+
+.addBusButton:hover {
+    background: #db0007;
+    background: linear-gradient(90deg, rgba(219, 0, 7, 0.68) 0%, rgba(255, 94, 94, 0.81) 69%);
+    border: 5px solid rgb(241, 65, 65);
+    color: white;
+
+}
+
+.addBusButton span {
+    padding-left: 1rem;
+}
+
+.addBusButton i {
+    display: inline-block;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.3s ease;
+    padding-left: 1rem;
+}
+
+.addBusButton:hover i {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.listOfBus {
+    margin-top: 2rem;
+}
+
+.presentBusTable {
+    text-align: center;
+}
+
+.noData {
+    margin-top: 10rem;
+}
+
+.busTableContainer {
+    padding: 1rem;
+    overflow-x: auto;
+}
+
+.busTable {
+    width: 100%;
+    border-collapse: collapse;
+    /* font-family: Arial, sans-serif; */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.busTable .firstTH {
+    border-radius: 15px 0px 0px 0px;
+}
+
+.busTable .lastTH {
+    border-radius: 0px 15px 0px 0px;
+}
+
+.busTable th,
+.busTable td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.busTable th {
+    background-color: #e53935;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+}
+
+.busTable tbody tr {
+    height: 60px;
+    background-color: #fff;
+    transition: background-color 0.3s;
+}
+
+.busTable tbody tr.even-row {
+    background-color: #f5f5f5;
+}
+
+.busTable tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+.delete-bus {
+    font-size: larger;
+    font-weight: normal;
+}
+
+.delete-bus:hover {
+    color: #e53935;
+}
+
+.paginationContainer {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.paginationContainer button {
+    margin: 0 5px;
+    padding: 8px 15px;
+    background-color: #e53935;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.paginationContainer button.active {
+    background-color: #b71c1c;
+    font-weight: bold;
+}
+
+.paginationContainer button:disabled {
+    background-color: #ccc;
+    pointer-events: none;
+}
+
+
+/* Fullscreen overlay */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}
+
+/* Blurred background */
+.popup-backdrop {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(6px);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Centered popup */
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 10px;
+    padding: 2rem;
+    width: 30rem;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.addBus {
+    justify-content: center;
+
+}
+
+/* Header */
+.addBusHeader {
+    position: relative;
+    text-align: center;
+}
+
+.addBusHeader h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #e53935;
+}
+
+/* Close button */
+.close-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border: none;
+    background: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Form styling */
+.addBusForm {
+    margin-top: 1.5rem;
+}
+
+.row {
+    text-align: left;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.row input {
+    width: 86%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.3s;
+}
+
+.row input:focus {
+    border-color: #1d9206;
+}
+
+.row select {
+    width: 93%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.3s;
+    background: none;
+}
+
+.row select:focus {
+    border-color: #1d9206;
+}
+
+.error-border {
+    border-color: #e53935 !important;
+}
+
+.formAddBtn {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.addBtn {
+    width: 7rem;
+    height: 2.5rem;
+    background-color: #e53935;
+    border: 1px solid #e53935;
+    color: white;
+    font-size: large;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 150ms ease;
+}
+
+.addBtn:hover {
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.5);
+}
+
+
+
+
+
+
+
+/* Loading animation styles */
+
+.error small {
+    color: red;
+    font-size: 12px;
+}
+
+
+div[class$="background"] {
+    background-color: #cc0033;
+    width: 220px;
+    position: fixed;
+    display: flex;
+    left: 50%;
+    top: 50%;
+    border-radius: 100%;
+    padding-bottom: 220px;
+    transform: translate(-50%, -50%);
+}
+
+/*bus body*/
+.bus-body {
+    width: 80%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+div[class*="bus-body2"] {
+    Width: 150px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin: auto;
+    display: block;
+    animation: bobbing 0.2s infinite ease-in-out forwards alternate;
+}
+
+@keyframes bobbing {
+    0% {
+        transform: rotate(0) translateY(0);
+    }
+
+    100% {
+        transform: rotate(0.1deg) translateY(5px);
+    }
+}
+
+/*wheels*/
+[class^="wheel"] {
+    Width: 20px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin: auto;
+    position: fixed;
+    display: inline-block;
+    transform-origin: 0%;
+    -webkit-transform-origin: 8.5px 8.5px;
+    -webkit-animation: spin .4s infinite;
+    /* Chrome, Safari, Opera */
+    animation: spin 0.4s infinite linear;
+}
+
+div[class$="front"] {
+    left: 19.1%;
+    bottom: -18%;
+}
+
+div[class$="back"] {
+    left: 64%;
+    bottom: -18%;
+}
+
+div[class$="back2"] {
+    left: 75%;
+    bottom: -18%;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+/* effects*/
+
+.shine {
+    /* Position it in the gap */
+    width: 80%;
+    height: 30%;
+    right: 9%;
+    top: 10%;
+    position: fixed;
+    z-index: 1;
+    /* Shape of the div to fit the windows */
+    transform: skew(13deg, 1deg);
+    border-radius: 56px 100px 20px 0;
+    /* The background */
+    background: linear-gradient(to right, transparent 76%, rgba(255, 255, 255, 0.8) 78%, rgba(255, 255, 255, 0.8) 96%, transparent 98%);
+    background-repeat: no-repeat;
+    /* The animation */
+    animation: shine 3s infinite ease forwards reverse;
+}
+
+@keyframes shine {
+    0% {
+        opacity: 0.1;
+        background-position: 50px top;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    50%,
+    100% {
+        opacity: 0.2;
+        background-position: -500px 0;
+    }
+}
+
+
+.speed-light {
+    position: absolute;
+    width: 20px;
+    border-radius: 10px;
+    height: 5%;
+    background: #fff;
+    top: -8%;
+    left: 50%;
+    animation: light 3s infinite ease forwards;
+}
+
+.speed-light.second {
+    top: 50%;
+    left: 30%;
+    animation-delay: 0.1s;
+}
+
+@keyframes light {
+    0% {
+        transform: translateX(0);
+        width: 0;
+        opacity: 0;
+    }
+
+    10% {
+        width: 10%;
+        opacity: 1;
+    }
+
+    30%,
+    100% {
+        transform: translateX(250px);
+        width: 0;
+        opacity: 0;
+    }
+}
+
+/*loader*/
+
+div.loader {
+    margin: auto;
+    top: 80%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    color: white;
+}
+
+.loader span {
+    animation: fadeinout 3s linear forwards infinite;
+    /* animation: loading 0.85s ease-in-out infinite alternate; */
+}
+
+@-webkit-keyframes fadeinout {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeinout {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.loader span:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.loader span:nth-child(3) {
+    animation-delay: 0.30s;
+}
+
+.loader span:nth-child(4) {
+    animation-delay: 0.45s;
+}
+
+.loader span:nth-child(5) {
+    animation-delay: 0.60s;
+}
+
+.loader span:nth-child(6) {
+    animation-delay: 0.75s;
+}
+
+.loader span:nth-child(7) {
+    animation-delay: 0.90s;
+}

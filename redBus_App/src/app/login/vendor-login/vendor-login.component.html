@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="left">
+        <img class="leftImg" [src]="locating">
+    </div>
+    <div class="form-card">
+        <img [src]="redBus" class="logo">
+        <div class="heading">
+            Welcome Back, Partner
+        </div>
+        <div class="heading2">
+            Please enter your email and OTP to continue
+        </div>
+        <div class="form">
+            <form [formGroup]="vendorLogin" (ngSubmit)="loginVendorVerifyOTP()">
+                <div class="emailDiv">
+                    <label for="emailId">Email</label>
+                    <input id="emailId" type="email" [(ngModel)]="inputEmail" formControlName="emailId"
+                        [class.invalid-input]="f['emailId'].dirty && f['emailId'].invalid"
+                        [class.valid-input]="f['emailId'].dirty && f['emailId'].valid" />
+
+                    <div *ngIf="submitted && f['emailId'].invalid">
+                        <small *ngIf="f['emailId'].errors?.['required']">Email is required</small>
+                        <small *ngIf="f['emailId'].errors?.['email']">Enter a valid email</small>
+                    </div>
+                </div>
+                <br>
+                <button *ngIf="!SendOTP" [disabled]="clickedOnSendOTP" type="button" (click)="sendOTP()">
+                    <ng-template #sendText>Send OTP</ng-template>
+                    <ng-container *ngIf="loadingOTP; else sendText">
+                        <span class="spinner"></span> Sending...
+                    </ng-container>
+                </button>
+
+
+                <div *ngIf="SendOTP" class="otpField">
+                    <label for="OTP">OTP</label>
+                    <input id="OTP" type="text" [(ngModel)]="inputOtp" formControlName="OTP"
+                        [class.invalid-input]="f['OTP'].dirty && f['OTP'].invalid"
+                        [class.valid-input]="f['OTP'].dirty && f['OTP'].valid" />
+
+
+                    <div class="otp-row">
+                        <div class="error-message" *ngIf="f['OTP'].dirty && f['OTP'].invalid">
+                            <small *ngIf="f['OTP'].errors?.['required']">OTP is required</small>
+                            <small *ngIf="f['OTP'].errors?.['pattern']">Enter a valid 6-digit OTP</small>
+                        </div>
+
+                        <div class="resend-wrapper">
+                            <span [class.disabled]="isButtonDisabled" (click)="reSendOTP()">
+                                {{ isButtonDisabled ? 'Resend OTP in ' + currentTimer + 's' : 'Resend OTP' }}
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <button type="submit" *ngIf="SendOTP">Login</button>
+            </form>
+
+            <br><br><br><br *ngIf="!SendOTP"><br *ngIf="!SendOTP">
+            <p class="signup">
+                Don’t have an account?
+                <span (click)="redirectToRegisterNewVendor()">Create an account</span>
+            </p>
+        </div>
+    </div>
+</div>
