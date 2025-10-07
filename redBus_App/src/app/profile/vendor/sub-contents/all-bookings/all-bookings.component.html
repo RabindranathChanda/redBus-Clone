@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <label for="busSelect">Select a Bus</label>
+            <button (click)="exportSeatChart()">Get Reservation Chart</button>
+        </div>
+        <div class="divider"></div>
+        <select id="busSelect" [(ngModel)]="selectedBusId" (change)="getBookingDetails()">
+            <option value="" selected disabled>Select scheduled bus</option>
+            <option *ngFor="let bus of buses" [value]="bus.scheduleId">
+                {{bus.scheduleDate | date:'MMM d, y'}} - {{ bus.busName }} - {{ bus.busVehicleNo }}
+            </option>
+        </select>
+    </div>
+
+
+    <table class=" booking-table" *ngIf="passengers.length > 0">
+        <thead>
+            <tr class="booking-header">
+                <th class="firstTH">Passenger Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Seat No</th>
+                <th>Mobile No</th>
+                <th class="lastTH">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let passenger of passengers" class="booking-row">
+                <td>{{ passenger.passengerName }}</td>
+                <td>{{ passenger.age }}</td>
+                <td>{{ passenger.gender }}</td>
+                <td>{{ passenger.seatNo }}</td>
+                <td>{{ passenger.mobileNo }}</td>
+                <td>{{ passenger.price | currency:'INR':'symbol':'1.0-0' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="passengers.length === 0" class="no-data">
+        No bookings found for the selected bus.
+    </div>
+</div>

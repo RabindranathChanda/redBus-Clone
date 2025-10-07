@@ -1,0 +1,667 @@
+.header {
+    background-color: #653cd8;
+    display: flex;
+    box-shadow: 0px 0.5px 10px #5d7a6a;
+    margin-bottom: 3rem;
+}
+
+.close {
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    color: white;
+    text-shadow: 0px 1px 10px #8cb69e;
+}
+
+
+
+
+
+/* Base container layout */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 20px;
+    gap: 2rem;
+}
+
+/* Bus graphics and seating */
+.busGraphics {
+    padding: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.seat-map {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+.driverSeat {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.strWheel {
+    width: 60px;
+    height: 60px;
+}
+
+.divider {
+    margin: 10px 0;
+    width: 100%;
+    height: 1px;
+    background-color: #d3d1d1;
+}
+
+.column-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+.seat-column {
+    display: flex;
+    flex-direction: column;
+    margin: 0 5px;
+}
+
+.gap-column {
+    margin-left: 30px;
+}
+
+.seat {
+    width: 30px;
+    height: 30px;
+    margin: 5px 0;
+    border: 2px solid #999;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+}
+
+.seat:hover {
+    border: 2px solid #8400ffde;
+    box-shadow: 0px 0px 5px #8400ff79;
+}
+
+.seat.available {
+    background-color: white;
+}
+
+.seat.selected {
+    background-color: #c3e6cb;
+    border-color: #28a745;
+}
+
+.seat.booked {
+    background-color: #f5c6cb;
+    border-color: #dc3545;
+    cursor: not-allowed;
+}
+
+/* Tooltip */
+.tooltip {
+    position: relative;
+}
+
+.tooltiptext {
+    visibility: hidden;
+    width: max-content;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 4px 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.seat-label {
+    font-size: 10px;
+    font-weight: 500;
+    color: #91919e;
+}
+
+/* Legend */
+.seatLegend {
+    margin-top: 20px;
+    text-align: left;
+    padding-left: 3rem;
+}
+
+.legend-header {
+    font-weight: bold;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.seat-type {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.Legend {
+    padding-left: 10px;
+}
+
+/* Passenger Section */
+.passenger {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 200%;
+    max-width: 500px;
+}
+
+.bus-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    background: #f9f9fb;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    font-family: Arial, sans-serif;
+    transition: box-shadow 0.1s ease-out;
+    width: 100%;
+}
+
+.bus-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.bus-title {
+    font-weight: bolder;
+    font-size: 20px;
+    padding-bottom: 3px;
+}
+
+.bus-subtitle,
+.bus-date {
+    font-size: 13px;
+    color: #666;
+}
+
+.bus-rating {
+    display: flex;
+    flex-direction: column;
+    background-color: #9eceb3;
+    padding: 5px;
+    border-radius: 12px;
+    align-items: center;
+    gap: 4px;
+    margin-top: 10px;
+}
+
+.rating-box {
+    background-color: #008b3e;
+    color: white;
+    padding: 2px 6px;
+    font-size: 12px;
+    border-radius: 6px;
+}
+
+.rating-count {
+    font-size: 12px;
+    color: #444;
+}
+
+.bus-timing {
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.time-label {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.seats-info {
+    font-size: 12px;
+    color: #999;
+}
+
+.seats-info span {
+    color: #d9534f;
+}
+
+.price-info {
+    text-align: right;
+}
+
+.price {
+    font-weight: bold;
+}
+
+.onwards {
+    font-size: 11px;
+    color: #999;
+}
+
+.payment {
+    margin-top: 16px;
+    text-align: right;
+}
+
+.payment button {
+    background-color: #d9534f;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    height: 2.5rem;
+}
+
+/* Passenger form cards */
+.passenger-form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    box-sizing: border-box;
+}
+
+.card h4 {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.pInfo {
+    flex: 1 1 calc(50% - 20px);
+    /* Two items per row */
+    display: flex;
+    flex-direction: column;
+}
+
+.pInfo.full-width {
+    flex: 1 1 100%;
+    /* Make price full width */
+}
+
+.pInfo label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #333;
+}
+
+.pInfo input,
+.pInfo select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: border-color 0.2s ease;
+}
+
+.pInfo input:focus,
+.pInfo select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.price-display {
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .bus-card {
+        max-width: 400px;
+    }
+
+    .passenger {
+        max-width: 100%;
+        align-items: flex-start;
+    }
+
+    .seat-map {
+        max-width: 100%;
+    }
+}
+
+/* 
+@media (max-width: 768px) {
+    .bus-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .bus-timing {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .price-info {
+        text-align: left;
+        margin-top: 8px;
+    }
+
+    .payment {
+        text-align: left;
+    }
+
+    .seatLegend {
+        margin-left: 0;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .seat {
+        width: 24px;
+        height: 24px;
+        font-size: 10px;
+    }
+
+    .strWheel {
+        width: 40px;
+        height: 40px;
+    }
+
+    .tooltiptext {
+        font-size: 12px;
+    }
+
+    .bus-title {
+        font-size: 16px;
+    }
+
+    .card {
+        max-width: 100%;
+        width: 100%;
+    }
+} */
+
+
+.error small {
+    color: red;
+    font-size: 12px;
+}
+
+
+div[class$="background"] {
+    background-color: #cc0033;
+    width: 220px;
+    position: fixed;
+    display: flex;
+    left: 50%;
+    top: 50%;
+    border-radius: 100%;
+    padding-bottom: 220px;
+    transform: translate(-50%, -50%);
+}
+
+/*bus body*/
+.bus-body {
+    width: 80%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+div[class*="bus-body2"] {
+    Width: 150px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin: auto;
+    display: block;
+    animation: bobbing 0.2s infinite ease-in-out forwards alternate;
+}
+
+@keyframes bobbing {
+    0% {
+        transform: rotate(0) translateY(0);
+    }
+
+    100% {
+        transform: rotate(0.1deg) translateY(5px);
+    }
+}
+
+/*wheels*/
+[class^="wheel"] {
+    Width: 20px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin: auto;
+    position: fixed;
+    display: inline-block;
+    transform-origin: 0%;
+    -webkit-transform-origin: 8.5px 8.5px;
+    -webkit-animation: spin .4s infinite;
+    /* Chrome, Safari, Opera */
+    animation: spin 0.4s infinite linear;
+}
+
+div[class$="front"] {
+    left: 19.1%;
+    bottom: -18%;
+}
+
+div[class$="back"] {
+    left: 64%;
+    bottom: -18%;
+}
+
+div[class$="back2"] {
+    left: 75%;
+    bottom: -18%;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+/* effects*/
+
+.shine {
+    /* Position it in the gap */
+    width: 80%;
+    height: 30%;
+    right: 9%;
+    top: 10%;
+    position: fixed;
+    z-index: 1;
+    /* Shape of the div to fit the windows */
+    transform: skew(13deg, 1deg);
+    border-radius: 56px 100px 20px 0;
+    /* The background */
+    background: linear-gradient(to right, transparent 76%, rgba(255, 255, 255, 0.8) 78%, rgba(255, 255, 255, 0.8) 96%, transparent 98%);
+    background-repeat: no-repeat;
+    /* The animation */
+    animation: shine 3s infinite ease forwards reverse;
+}
+
+@keyframes shine {
+    0% {
+        opacity: 0.1;
+        background-position: 50px top;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    50%,
+    100% {
+        opacity: 0.2;
+        background-position: -500px 0;
+    }
+}
+
+
+.speed-light {
+    position: absolute;
+    width: 20px;
+    border-radius: 10px;
+    height: 5%;
+    background: #fff;
+    top: -8%;
+    left: 50%;
+    animation: light 3s infinite ease forwards;
+}
+
+.speed-light.second {
+    top: 50%;
+    left: 30%;
+    animation-delay: 0.1s;
+}
+
+@keyframes light {
+    0% {
+        transform: translateX(0);
+        width: 0;
+        opacity: 0;
+    }
+
+    10% {
+        width: 10%;
+        opacity: 1;
+    }
+
+    30%,
+    100% {
+        transform: translateX(250px);
+        width: 0;
+        opacity: 0;
+    }
+}
+
+/*loader*/
+
+div.loader {
+    margin: auto;
+    top: 80%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    color: white;
+}
+
+.loader span {
+    animation: fadeinout 3s linear forwards infinite;
+    /* animation: loading 0.85s ease-in-out infinite alternate; */
+}
+
+@-webkit-keyframes fadeinout {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeinout {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.loader span:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.loader span:nth-child(3) {
+    animation-delay: 0.30s;
+}
+
+.loader span:nth-child(4) {
+    animation-delay: 0.45s;
+}
+
+.loader span:nth-child(5) {
+    animation-delay: 0.60s;
+}
+
+.loader span:nth-child(6) {
+    animation-delay: 0.75s;
+}
+
+.loader span:nth-child(7) {
+    animation-delay: 0.90s;
+}

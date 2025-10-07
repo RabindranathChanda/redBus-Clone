@@ -1,0 +1,35 @@
+# === ASP.NET Core (redBus-api) ===
+redBus-api/**/bin/
+redBus-api/**/obj/
+redBus-api/**/Debug/
+redBus-api/**/*.user
+redBus-api/**/*.suo
+redBus-api/**/*.pdb
+redBus-api/**/*.log
+.redBus-api/.vs/
+*.db
+
+# === Angular (redBus_App) ===
+redBus_App/node_modules/
+redBus_App/dist/
+redBus_App/.angular/
+redBus_App/.vscode/
+redBus_App/package-lock.json
+redBus_App/npm-debug.log
+redBus_App/.env
+redBus_App/localhost.csr
+redBus_App/localhost.key
+redBus_App/localhost.crt
+
+# === Othere & OS & Editor Files ===
+.DS_Store
+Thumbs.db
+*.ini
+*.txt
+*.sql
+
+# === Git ===
+*.swp
+*.swo
+*.bak
+*.tmp

@@ -1,0 +1,225 @@
+.main-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: #e1e4e9;
+}
+
+/* For larger screens (default) */
+@media (min-width: 1024px) {
+  .main-container {
+    padding-left: 20rem;
+    padding-right: 20rem;
+  }
+}
+
+/* For medium screens */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .main-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* For small screens */
+@media (max-width: 767px) {
+  .main-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+
+.filter-box {
+  width: 260px;
+  height: 80vh;
+  background: #f9f9fb;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.filter-title {
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.filter-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.filter-section {
+  border-top: 1px solid #e2e2e2;
+  padding: 12px 0;
+}
+
+.filter-label {
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.bus-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
+  background: #f9f9fb;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: 12px;
+  margin-bottom: 1rem;
+  font-family: Arial, sans-serif;
+  transition: box-shadow 0.1s ease-out;
+}
+
+.bus-card:hover {
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.bus-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.bus-title {
+  font-weight: bolder;
+  font-size: 20px;
+  padding-bottom: 3px;
+}
+
+.bus-subtitle {
+  font-size: 13px;
+  padding-top: 3px;
+  color: #666;
+}
+.bus-vendor {
+  font-size: 15px;
+  font-weight: 600;
+  padding-top: 3px;
+  color: #666;
+}
+
+.bus-date{
+  font-size: 13px;
+  color: #666;
+}
+
+.bus-rating {
+  flex-direction: column;
+  background-color: #9eceb3;
+  padding: 5px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rating-box {
+  background-color: #008b3e;
+  color: white;
+  padding: 2px 6px;
+  font-size: 12px;
+  border-radius: 6px;
+}
+
+.rating-count {
+  font-size: 12px;
+  color: #444;
+}
+
+.bus-timing {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.time-label {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.seats-info {
+  font-size: 12px;
+  color: #777;
+}
+
+.seats-info span {
+  color: #d9534f;
+}
+
+.price-info {
+  text-align: right;
+}
+
+.price {
+  font-weight: bold;
+}
+
+.onwards {
+  font-size: 11px;
+  color: #999;
+}
+
+.view-seats {
+  margin-top: 16px;
+  text-align: right;
+}
+
+.view-seats button {
+  background-color: #d9534f;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.no-bus-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10rem;
+  text-align: center;
+}
+
+.no-bus-message .one img {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+  mix-blend-mode: multiply;
+}
+
+.no-bus-message .one {
+  font-size: 1.2rem;
+  color: #555;
+}

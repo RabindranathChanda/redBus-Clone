@@ -1,0 +1,341 @@
+.container {
+    height: 100%;
+    width: 100%;
+    overflow-y: hidden;
+
+}
+
+.mainContainer {
+    position: fixed;
+    background-color: #fff;
+    padding: 1.5rem;
+    margin-left: .5rem;
+    width: 100%;
+    z-index: 1;
+}
+
+.mainContainer span {
+    margin-left: 20px;
+    border-left: 5px solid #3498db;
+    padding: 8px;
+    font-size: small;
+    border-radius: 8px;
+    color: #2c3e50;
+    cursor: pointer;
+    letter-spacing: 1.5px;
+    transition: all 1ms ease-in-out;
+}
+
+.mainContainer span:hover {
+    box-shadow: 0px 0px 1px #3498db;
+}
+
+
+.divider {
+    height: 1px;
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.3rem;
+    background-color: #aaa;
+}
+
+.tab {
+    margin-right: 10px;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.tab.active {
+    border-bottom: 2px solid #c24b4b;
+}
+
+.bookings {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
+    margin-top: 8rem;
+}
+
+.lock-scroll {
+    overflow: hidden;
+    max-height: 100vh;
+}
+
+.bookingsCard {
+    min-width: 385px;
+    margin-bottom: 0.5rem;
+    padding: 1.5rem;
+    background-color: #fff;
+    filter: drop-shadow(0px 0px 6px #ccc);
+    border-radius: 20px;
+    cursor: pointer;
+    z-index: 0;
+}
+
+.bookingHeader {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1rem;
+}
+
+.bookingHeader h3 {
+    margin: 0 0 .5rem 0;
+}
+
+.bookingHeader p {
+    margin: 0.3rem 0;
+}
+
+.passengerList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.passengerCard {
+    background-color: #f5f5f5;
+    border-radius: 12px;
+    padding: 1rem;
+    border-left: 5px solid #3498db;
+}
+
+.passengerCard h4 {
+    margin: 0 0 .5rem 0;
+}
+
+.passengerCard p {
+    margin: 0.3rem 0;
+}
+
+.status {
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 5px;
+}
+
+.status.confirmed {
+    color: green;
+}
+
+.status.pending {
+    color: orange;
+}
+
+.status.booked {
+    color: #2c3e50;
+}
+
+.status s {
+    color: #b93939;
+}
+
+.passengerHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: -10px;
+}
+
+.menu {
+    position: relative;
+    transition: all 110ms;
+    /* z-index: 0; */
+}
+
+.menuBtn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.menuDropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    width: 150px;
+    background-color: white;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.507);
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.menuDropdown button {
+    display: block;
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.menuDropdown button:hover {
+    background-color: #f0f0f0;
+}
+
+.menu.show .menuDropdown {
+    display: block;
+}
+
+.menu:hover {
+    background-color: #d1d1d1;
+    border-radius: 50px;
+}
+
+.bookingsCard:hover {
+    transform: translateY(-4px);
+    transition: transform 0.2s ease;
+}
+
+.blurred {
+    filter: blur(5px);
+    pointer-events: none;
+    user-select: none;
+}
+
+.editPanel {
+    position: fixed;
+    top: 6rem;
+    right: -700px;
+    width: 600px;
+    height: calc(100vh - 6rem);
+    background: #fff;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: right 0.3s ease-in-out;
+    z-index: 1;
+}
+
+.editPanelContent {
+    flex: 1;
+    overflow-y: auto;
+    /* Give breathing room for bottom content */
+}
+
+
+.editPanel h4 {
+    margin: 0.5rem 0rem 0.5rem 0rem;
+}
+
+@media only screen and (max-width:900px) {
+    .editPanel {
+        width: 420px;
+    }
+}
+
+.editPanel.visible {
+    right: 0;
+}
+
+.editPanelHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.closeBtn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+.cancelTicketList {
+    margin-top: 15px;
+}
+
+.checkBox {
+    display: flex;
+    gap: 1rem;
+}
+
+.cancelTicketListPassenger label {
+    display: flex;
+    flex-direction: column;
+    margin: 0.3rem 0rem 0.3rem 2.5rem;
+}
+
+.cancelTicketListPassenger h4 {
+    margin: 0rem;
+}
+
+.cancelTicketListPassenger {
+    /* display: flex; */
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #eee;
+    border-left: 5px solid #3498db;
+    /* margin: 0 0 .5rem 0; */
+}
+
+.disclosure {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    gap: 1rem;
+
+}
+
+.consent {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.totalAmount {
+    display: flex;
+    text-align: right;
+    flex-direction: column;
+}
+
+.totalAmount p {
+    margin: 0.1rem 0rem 0.1rem 0rem;
+}
+
+
+.notice {
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+    background-color: #f5e66496;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.noticeHeader {
+    margin-bottom: 12px;
+}
+
+.noticeBody li {
+    margin-bottom: 7px;
+}
+
+
+.confirmBtn {
+    margin-top: 20px;
+    padding: 10px;
+    width: 100%;
+    background: #e53935;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.confirmBtn[disabled] {
+    background-color: #2c3e50;
+    cursor: not-allowed;
+}

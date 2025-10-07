@@ -1,0 +1,109 @@
+<div class="container">
+    <div class="header">
+        Privacy & Security
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="privacySettings">
+
+        <div class="resetPassword">
+            <div class="header2">Reset Account Password</div>
+            <div class="divider"></div>
+
+            <div class="reset">
+                <div class="pass">
+                    <span>
+                        <strong>New Password</strong>
+                    </span>
+                    <span class="input-wrapper">
+                        <input [type]="showNewPassword ? 'text' : 'password'" [(ngModel)]="newPass"
+                            autocomplete="new-password" />
+                        <button type="button" class="eye-btn" (click)="showNewPassword = !showNewPassword">
+                            <i class="fa" [ngClass]="showNewPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                        </button>
+                    </span>
+                </div>
+                <div class="pass">
+                    <span>
+                        <strong>Confirm Password</strong>
+                    </span>
+                    <span class="input-wrapper">
+                        <input [type]="showConfirmPassword ? 'text' : 'password'" [(ngModel)]="confirmPass"
+                            autocomplete="new-password" />
+                        <button type="button" class="eye-btn" (click)="showConfirmPassword = !showConfirmPassword">
+                            <i class="fa" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                        </button>
+                    </span>
+                </div>
+
+                <div class="resetButton">
+                    <button type="button" class="resetBtn" (click)="onResetPassword()"> Reset Password</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="termsConditions">
+            <div class="header2"><i class="fa-solid fa-handshake"></i> &nbsp; Terms & Conditions </div>
+            <div class="divider"></div>
+
+            <div class="terms">
+                <ol>
+                    <li>
+                        <strong>User Account</strong>
+                        <p>You are responsible for maintaining the confidentiality of your account information.</p>
+                        <p>You agree to provide accurate, up-to-date details during registration and booking.</p>
+                    </li>
+
+                    <li>
+                        <strong>Bookings & Payments</strong>
+                        <p>Tickets are subject to availability and booking confirmation.</p>
+                        <p>All payments must be made through the available secure payment gateways.</p>
+                        <p>Booking once confirmed cannot be transferred to another individual.</p>
+                    </li>
+
+                    <li>
+                        <strong>Cancellations & Refunds</strong>
+                        <p>Cancellation policies depend on the bus operator. Refunds (if applicable) are subject to
+                            their terms.</p>
+                        <p>RedBus reserves the right to cancel bookings due to unforeseen circumstances (e.g. operator
+                            cancellation, technical issues).</p>
+                    </li>
+
+                    <li>
+                        <strong>User Conduct</strong>
+                        <p>Misuse of the app (e.g. fake bookings, abuse, or fraudulent activity) may lead to account
+                            suspension or legal action.</p>
+                        <p>Do not use the platform for any unlawful or unauthorized purpose.</p>
+                    </li>
+
+                    <li>
+                        <strong>Privacy</strong>
+                        <p>Your data is stored securely and is used only for service-related communication.</p>
+                        <p>We do not sell or share your personal information with third parties without consent.</p>
+                    </li>
+
+                    <li>
+                        <strong>Platform Availability</strong>
+                        <p>We strive to maintain 24/7 access but do not guarantee uninterrupted service due to
+                            maintenance or server issues.</p>
+                    </li>
+
+                    <li>
+                        <strong>Modification of Terms</strong>
+                        <p>These terms may be updated without notice. Continued use of the platform indicates acceptance
+                            of the latest terms.</p>
+                    </li>
+
+                    <li>
+                        <strong>Governing Law</strong>
+                        <p>These terms are governed by applicable laws of your jurisdiction. Legal disputes shall be
+                            handled under competent courts.</p>
+                    </li>
+                </ol>
+            </div>
+
+
+        </div>
+    </div>
+</div>

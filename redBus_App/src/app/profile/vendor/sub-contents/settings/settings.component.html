@@ -1,0 +1,69 @@
+<!-- <div class="container">
+    <div class="payment">
+        <h1>Payment & Finance Management</h1>
+        <div class="divider"></div>
+
+        <div class="pmtBlock">
+            <ng-template #bankUnAvl> You need to verify Your Bank Account.</ng-template>
+
+
+
+
+
+
+        </div>
+    </div>
+</div> -->
+
+<div class="container">
+  <div class="payment">
+    <h1>Payment & Finance Management</h1>
+    <div class="divider"></div>
+
+    <div class="pmtBlock">
+
+
+      <ng-container *ngIf="vendorDetails.vendorBankDetails; else bankUnAvl">
+        <div class="bankInfo">
+          <div class="infoRow">
+            <span class="label">Account Holder Name:</span>
+            <span class="value">{{ vendorDetails.vendorBankDetails.accountHolderName }}</span>
+          </div>
+          <div class="infoRow">
+            <span class="label">Bank Name:</span>
+            <span class="value">{{ vendorDetails.vendorBankDetails.bankName }}</span>
+          </div>
+          <div class="infoRow">
+            <span class="label">Account Number:</span>
+            <span class="value">{{ vendorDetails.vendorBankDetails.maskedAccountNumber }}</span>
+          </div>
+          <div class="infoRow">
+            <span class="label">IFSC Code:</span>
+            <span class="value">{{ vendorDetails.vendorBankDetails.ifscCode }}</span>
+          </div>
+          <div class="infoRow">
+            <span class="label">UPI ID:</span>
+            <span class="value">{{ vendorDetails.vendorBankDetails.upiid }}</span>
+          </div>
+          <div class="statusRow">
+            <span>Status:</span>
+            <span [ngClass]="vendorDetails.vendorBankDetails.isBankVerified ? 'verified' : 'unverified'">
+              {{ vendorDetails.vendorBankDetails.isBankVerified ? 'Verified' : 'Not Verified' }}
+            </span>
+          </div>
+          <button class="verifyBtn" *ngIf="!vendorDetails.vendorBankDetails.isBankVerified" (click)="verifyBank()">
+            Verify Bank
+          </button>
+        </div>
+      </ng-container>
+
+
+      <ng-template #bankUnAvl>
+        <div class="bankAlert">
+          You need to verify your Bank Account.
+        </div>
+      </ng-template>
+
+    </div>
+  </div>
+</div>

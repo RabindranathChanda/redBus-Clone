@@ -1,0 +1,393 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f6f8;
+}
+
+.container {
+    width: 100vw;
+    height: 89vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login {
+    width: 65vw;
+    height: 75vh;
+    display: flex;
+    border-radius: 1.5rem;
+    background-color: #ffffff;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.left-panel,
+.right-panel {
+    width: 50%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.left-panel {
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.right-panel {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(to bottom right, #c84e4e, #fb8f8f);
+    color: white;
+    text-align: center;
+}
+
+.logo {
+    width: 80px;
+    align-self: center;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin: 0.5rem 0;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.btn.social {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.google {
+    background-color: #eee;
+}
+
+.google:hover,
+.facebook:hover {
+    background-color: rgba(100, 148, 237, 0.199);
+}
+
+.facebook {
+    background-color: #eee;
+}
+
+.btn.social img {
+    width: 20px;
+    height: 20px;
+}
+
+.divider {
+    margin: 1rem 0;
+    position: relative;
+    text-align: center;
+}
+
+.divider span {
+    background: white;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 1;
+    color: #aaa;
+}
+
+.divider::before {
+    content: "";
+    height: 1px;
+    width: 100%;
+    background: #ccc;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: 0;
+}
+
+.form {
+    display: flex;
+    padding-top: 2rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 0.75rem 1rem;
+    border: 1px solid #999;
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    align-items: center;
+}
+
+.options span {
+    color: #c84e4e;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.options-otp {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 0.85rem;
+    align-items: center;
+}
+
+.options-otp button {
+    font-size: 15px;
+    color: #c84e4e;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+.options-otp button[disabled] {
+    cursor: not-allowed;
+}
+
+.form .error {
+    text-align: left;
+    color: #aa3b3b;
+}
+
+.spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ccc;
+    border-top: 2px solid #007bff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.btn.login-btn {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border: none;
+    background-color: #c84e4e;
+    color: white;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn.login-btn:hover {
+    background-color: #aa3b3b;
+}
+
+.toggle-btn {
+    color: #666;
+}
+
+.signup {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+}
+
+.signup span {
+    color: #c84e4e;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.right-panel .content img {
+    width: 80%;
+    max-width: 300px;
+    margin-bottom: 1rem;
+}
+
+.right-panel h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.right-panel p {
+    font-size: 0.95rem;
+}
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding: 0.75rem 2.5rem 0.75rem 1rem;
+    border: 1px solid #999;
+    border-radius: 0.5rem;
+}
+
+.password-wrapper .toggle-btn {
+    position: absolute;
+    right: 0.75rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.password-wrapper .toggle-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+.content {
+    z-index: 1;
+}
+
+.floating-logo-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.floating-logo {
+    position: absolute;
+    opacity: 0.7;
+    filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 0.788));
+    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+    animation-iteration-count: infinite;
+}
+
+.float-up {
+    animation-name: float-up;
+}
+
+.float-down {
+    animation-name: float-down;
+}
+
+.float-left {
+    animation-name: float-left;
+}
+
+.float-right {
+    animation-name: float-right;
+}
+
+.float-diag1 {
+    animation-name: float-diag1;
+}
+
+.float-diag2 {
+    animation-name: float-diag2;
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(0);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translateY(-150%);
+        opacity: 0;
+    }
+}
+
+@keyframes float-down {
+    0% {
+        transform: translateY(0);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translateY(150%);
+        opacity: 0;
+    }
+}
+
+@keyframes float-left {
+    0% {
+        transform: translateX(0);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translateX(-150%);
+        opacity: 0;
+    }
+}
+
+@keyframes float-right {
+    0% {
+        transform: translateX(0);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translateX(150%);
+        opacity: 0;
+    }
+}
+
+@keyframes float-diag1 {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translate(100%, -100%);
+        opacity: 0;
+    }
+}
+
+@keyframes float-diag2 {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translate(-100%, 100%);
+        opacity: 0;
+    }
+}
