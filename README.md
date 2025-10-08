@@ -1,70 +1,150 @@
-# redBus Clone – Bus Booking Web Application
+# 🚍 redBus Clone – Full-Stack Bus Booking Web Application
 
-I developed a fully functional redBus clone, a bus booking web application, using ASP.NET Core Web API for the backend and Angular 19 for the frontend. The project simulates the core features of the redBus platform with a responsive UI and secure booking process.
+A full-featured **bus booking web application** inspired by the redBus platform, built with **ASP.NET Core Web API** (backend) and **Angular 19** (frontend).  
+This project replicates real-world booking functionalities with a **responsive UI**, **secure authentication**, and **role-based access** for users and vendors.
 
-🔧 Key Features Implemented:
+```
+    ⚠️ This project is under development.
+```
+---
 
-    User and Vendor Authentication:
+## 🔑 Key Features
 
-        JWT-based login and refresh token system.
+### 👥 User & Vendor Authentication
+- JWT-based login with **access and refresh token system**  
+- **Role-based access control** for users and vendors  
+- Session validation to prevent multiple logins with the same refresh token  
+- **Google reCAPTCHA v3** integration for bot protection on login and signup  
 
-        Separate login panels and role-based access control for users and vendors.
+### 🚌 Booking Management
+- Smart booking form with **date/time pickers** and **dynamic dropdowns** for route selection  
+- **Real-time fare calculation** and seat availability tracking  
 
-        Session validation to prevent multiple logins with the same refresh token.
+### 🧩 Vendor Dashboard
+- Vendors can **list buses**, manage schedules, and view bookings  
+- Includes **form validation**, error handling, and toast notifications for user feedback  
 
-    Booking Form with Smart UI:
+### 🗄️ Database Integration
+- Entity Framework models and DbContext for **Users, Buses, Bookings, and Transactions**  
+- Support for MSSQL with migration and database import options  
 
-        Date picker, time picker, and dropdowns for source/destination selection.
+### 📬 Email Notification System
+- Sends **confirmation emails** upon successful bookings  
+- Auto-generated **tickets with detailed booking info**
 
-        Real-time fare calculation and seat availability display.
+---
 
-        Fully responsive design with dark mode support.
+## 🧰 Tech Stack
 
-    Database Integration:
+| Layer | Technology |
+|-------|-------------|
+| **Frontend** | Angular 19, TypeScript, HTML, CSS |
+| **Backend** | ASP.NET Core Web API, C# |
+| **Database** | Microsoft SQL Server (MSSQL) |
+| **Security** | JWT Authentication, Google reCAPTCHA v3 |
+| **Email Service** | Google SMTP |
 
-        Models and DbContext generated for managing users, buses, bookings, and transactions.
+---
 
-    Email Notification System:
+## ⚙️ Local Setup Guide
 
-        Confirmation emails sent on successful booking using SMTP.
+### 🖥️ Frontend Setup
+```bash
+cd ./redBus_App
+npm install
+ng serve
+````
 
-        Auto-generated ticket with booking details.
+> **Note:**
+>
+> * Update the `apiURL` in `src/environments/environment.ts` & `src/environments/environment.development.ts` with your backend API endpoint.
+> * Add your **Google reCAPTCHA v3 site key** in both the environment file as:
+>
+>   ```typescript
+>   export const environment = {
+>     production: false,
+>     apiUrl: 'https://localhost:7042/api',
+>     reCaptchaSettings: {
+>       SiteKey: 'YOUR_SITE_KEY'
+>     }
+>   };
+>   ```
 
-    Vendor Panel:
+---
 
-        Vendors can list buses, manage schedules, and view bookings.
+### 🧱 Backend Setup
 
-        Form validation and feedback mechanisms in place for error handling.
+```bash
+cd ./redBus-api
+```
 
-    Responsive UI:
+Open `redBus-api.sln` in **Visual Studio 2022** and build the project.
 
-        Designed using Angular with CSS for responsiveness.
+> **Note:**
+>
+> * Add your **Mail ID and App Password** inside `appsettings.json`:
+>
+>   ```json
+>   "Email": {
+>     "Username": "yourmail@gmail.com",
+>     "Password": "yourapppassword"
+>   }
+>   ```
+>
+> * Add your **SQL Server instance address**:
+>
+>   ```json
+>   "AllowedHosts": "*",
+>   "ConnectionStrings": {
+>     "DBConnection": "Server=YOUR_SQL_SERVER\\SQLEXPRESS;Database=redBus;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true"
+>   }
+>   ```
+>
+> * Add your **Google reCAPTCHA site key and secret key**:
+>
+>   ```json
+>   "reCaptchaSettings": {
+>     "SiteKey": "YOUR_SITE_KEY",
+>     "SecretKey": "YOUR_SECRET_KEY"
+>   }
+>   ```
+>
+> * The backend validates reCAPTCHA tokens on login and signup endpoints for bot prevention.
 
-        Dynamic form behavior with loading indicators and toast notifications.
+---
 
-⚙️ Tech Stack:
+### 🗃️ Database Setup
 
-    Frontend: Angular 19, TypeScript, HTML, CSS
+**Option 1: Import from Backup**
 
-    Backend: ASP.NET Core Web API, C#
+```bash
+cd './DB Backup'
+```
 
-    Database: MSSQL
+Import `redBus.bacpac` (not `redBus.old.bacpac`) into **SQL Server Management Studio (SSMS)**.
+📖 [Reference Guide – Importing .bacpac Files](https://www.sqlshack.com/importing-a-bacpac-file-for-a-sql-database-using-ssms/)
 
-💻 Setup Locally:
+**Option 2: Using Entity Framework**
 
-    Frontend:
-        `cd ./redBus_App`
-        `npm install`
-        `ng server`
+```bash
+Update-Database
+```
 
-        set the apiURL in the environment files as your backend.
+---
 
-    Backend:
-        `cd ./redBus-api`
-        Just open the `redBus-api.sln` in Visual Studio 2022 and build the project.
+## 🧩 Project Highlights
 
-    DB: 
-        `cd './DB Backup'`
-        and import the `redBus.bacpac`(not redBus.old.bacpac). in SSMS 2021. Refer (https://www.sqlshack.com/importing-a-bacpac-file-for-a-sql-database-using-ssms/)
+* ✅ Clean architecture with separation of concerns
+* 🔒 Secure JWT & refresh token flow
+* 🧠 Google reCAPTCHA v3 integration for advanced bot protection
+* 🌗 Responsive UI with dark mode
+* 📧 SMTP-based email system
+* 💬 Real-time feedback and validation
 
-        or you can Update-Database through the package manager console.
+---
+
+## 🧑‍💻 Author
+
+**Rabindranath Chanda**
+.NET & Angular Developer
+📍 Kolkata, India
