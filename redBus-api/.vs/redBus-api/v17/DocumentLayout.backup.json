@@ -79,8 +79,7 @@
               "ViewState": "AgIAAEUAAAAAAAAAAAAAABcAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-01T07:24:33.804Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -90,7 +89,7 @@
               "RelativeDocumentMoniker": "redBus-api\\appsettings.json",
               "ToolTip": "D:\\github\\redBus-Clone\\redBus-api\\redBus-api\\appsettings.json",
               "RelativeToolTip": "redBus-api\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-05-21T11:19:51.982Z",
               "IsPinned": true,
