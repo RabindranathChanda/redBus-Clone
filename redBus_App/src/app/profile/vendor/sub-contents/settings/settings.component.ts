@@ -6,9 +6,10 @@ import { VendorAuthService } from '../../../../services/auth/User&Vendor/vendor-
 import { ToastrService } from 'ngx-toastr';
 import { single } from 'rxjs';
 
+
 @Component({
     selector: 'app-settings',
-    imports: [CommonModule, FormsModule, ReactiveFormsModule],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, FormsModule],
     templateUrl: './settings.component.html',
     styleUrl: './settings.component.css'
 })
@@ -16,6 +17,20 @@ export class SettingsComponent implements OnInit {
     vendorDetails: Vendor = new Vendor();
     private vendorAuthService = inject(VendorAuthService);
     private toaster = inject(ToastrService);
+
+    withdrawalHistory = [
+      { date: '12 Oct 2024', amount: '₹5,000', status: 'Completed', transactionId: 'TXN123456' },
+      { date: '10 Oct 2024', amount: '₹3,000', status: 'Pending', transactionId: 'TXN789012' }
+    ];
+    pendingPayouts = [
+      { date: '15 Oct 2024', amount: '₹2,000', status: 'Processing' }
+    ];
+    nextWithdrawalDate = '13 Oct 2025, 10:00 AM'; // From API
+
+    downloadCSV() { /* Implement CSV export */ }
+    downloadPDF() { /* Implement PDF export */ }
+
+
 
 
     ngOnInit(): void {
@@ -80,5 +95,43 @@ export class SettingsComponent implements OnInit {
 
 
 
+
+    // In component
+    notifications = {
+      successWithdraw: true,
+      failedTx: true,
+      weeklyReport: false
+    };
+    twoFactorEnabled = false;
+    payoutMethod = 'Bank'; // Default
+
+    toggleNotification(key: string) {
+    //   this.notifications[key] = !this.notifications[key];
+      // Call API to save, e.g., this.vendorService.updateNotifications(this.notifications);
+    }
+
+    enableTwoFactor() {
+      // Call API, e.g., this.vendorService.enable2FA();
+    }
+
+    savePayoutMethod() {
+      // Call API, e.g., this.vendorService.updatePayoutMethod(this.payoutMethod);
+    }
+
+    downloadMonthlyInvoice() {
+      // Implement download, e.g., window.open('/api/vendor/invoices/monthly');
+    }
+
+    downloadGSTReport() {
+      // Similar to above
+    }
+
+    reportIssue() {
+      // Open modal or navigate, e.g., this.dialog.open(ReportIssueComponent);
+    }
+
+    contactSupport() {
+      // e.g., window.open('mailto:support@redbusclone.com'); or chat integration
+    }
 
 }

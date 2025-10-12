@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div class="payment">
     <div class="header-section">
       <i class="fas fa-credit-card icon-large"></i>
@@ -80,4 +80,421 @@
       </div>
     </div>
   </div>
+</div> -->
+
+
+<!-- <div class="container">
+  <div class="payment">
+    <div class="header-section">
+      <i class="fas fa-credit-card icon-large"></i>
+      <h1>Payment & Finance Management</h1>
+    </div>
+    <div class="divider"></div>
+
+    <div class="two-column-layout">
+      <div class="pmtBlock bank-card column">
+        <div class="card-header">
+          <i class="fas fa-university icon-medium"></i>
+          <h3>Bank Details</h3>
+        </div>
+        <ng-container *ngIf="vendorDetails.vendorBankDetails; else bankUnAvl">
+          <div class="bankInfo">
+            <div class="infoRow">
+              <span class="label"><i class="fas fa-user icon-small"></i> Account Holder Name:</span>
+              <span class="value">{{ vendorDetails.vendorBankDetails.accountHolderName }}</span>
+            </div>
+            <div class="infoRow">
+              <span class="label"><i class="fas fa-building icon-small"></i> Bank Name:</span>
+              <span class="value">{{ vendorDetails.vendorBankDetails.bankName }}</span>
+            </div>
+            <div class="infoRow">
+              <span class="label"><i class="fas fa-credit-card icon-small"></i> Account Number:</span>
+              <span class="value">{{ vendorDetails.vendorBankDetails.maskedAccountNumber }}</span>
+            </div>
+            <div class="infoRow">
+              <span class="label"><i class="fas fa-code icon-small"></i> IFSC Code:</span>
+              <span class="value">{{ vendorDetails.vendorBankDetails.ifscCode }}</span>
+            </div>
+            <div class="infoRow">
+              <span class="label"><i class="fas fa-mobile-alt icon-small"></i> UPI ID:</span>
+              <span class="value">{{ vendorDetails.vendorBankDetails.upiid }}</span>
+            </div>
+            <div class="statusRow">
+              <span class="label"><i class="fas fa-info-circle icon-small"></i> Status:</span>
+              <span [ngClass]="vendorDetails.vendorBankDetails.isBankVerified ? 'verified' : 'unverified'">
+                <i *ngIf="vendorDetails.vendorBankDetails.isBankVerified" class="fas fa-check-circle"></i>
+                <i *ngIf="!vendorDetails.vendorBankDetails.isBankVerified" class="fas fa-exclamation-triangle"></i>
+                {{ vendorDetails.vendorBankDetails.isBankVerified ? 'Verified' : 'Not Verified' }}
+              </span>
+            </div>
+            <button class="verifyBtn" *ngIf="!vendorDetails.vendorBankDetails.isBankVerified" (click)="verifyBank()">
+              <i class="fas fa-check"></i> Verify Bank
+            </button>
+          </div>
+        </ng-container>
+
+        <ng-template #bankUnAvl>
+          <div class="bankAlert">
+            <i class="fas fa-exclamation-triangle"></i>
+            You need to verify your Bank Account to proceed with withdrawals.
+          </div>
+        </ng-template>
+      </div>
+
+      <div class="pmtBlock earnings-card column">
+        <div class="card-header">
+          <i class="fas fa-chart-line icon-medium"></i>
+          <h3>Earnings</h3>
+        </div>
+        <div class="earnings-info">
+          <div class="infoRow large">
+            <span class="label"><i class="fas fa-wallet icon-small"></i> Total Earnings:</span>
+            <span class="value highlighted">₹ 10,000</span>
+          </div>
+          <div class="infoRow large">
+            <span class="label"><i class="fas fa-money-bill-wave icon-small"></i> Available for Withdrawal:</span>
+            <span class="value highlighted">₹ 10,000</span>
+          </div>
+        </div>
+        <button class="withdrawBtn" [disabled]="!canWithdrawToday()" (click)="withdrawMoney()">
+          <i class="fas fa-download"></i> Withdraw Money
+        </button>
+        <div *ngIf="!canWithdrawToday()" class="withdrawNote">
+          <i class="fas fa-clock"></i> You can withdraw only once per day.
+        </div>
+
+        <div class="section-divider"></div>
+        <div class="limit-info">
+          <i class="fas fa-info-circle"></i>
+          <span>You can withdraw once per day. Maximum ₹50,000 per transaction.</span>
+        </div>
+
+        <div class="section-divider"></div>
+        <div class="eligibility-info">
+          <i class="fas fa-calendar-alt"></i>
+          <strong>Next withdrawal available on:</strong> {{ nextWithdrawalDate }}
+        </div>
+
+        <div class="section-divider"></div>
+        <div class="pending-payouts">
+          <h4><i class="fas fa-clock icon-small"></i> Pending Payouts</h4>
+          <div *ngIf="pendingPayouts.length > 0; else noPending" class="payout-list">
+            <div *ngFor="let payout of pendingPayouts" class="payout-item">
+              <span class="payout-date">{{ payout.date }}</span>
+              <span class="payout-amount">{{ payout.amount }}</span>
+              <span class="payout-status pending">{{ payout.status }}</span>
+            </div>
+          </div>
+          <ng-template #noPending>
+            <p class="no-items">No pending payouts at the moment.</p>
+          </ng-template>
+        </div>
+
+        <div class="section-divider"></div>
+        <div class="history-section">
+          <h4><i class="fas fa-history icon-small"></i> Withdrawal History</h4>
+          <div class="table-wrapper">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Transaction ID</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of withdrawalHistory">
+                  <td>{{ item.date }}</td>
+                  <td>{{ item.amount }}</td>
+                  <td>
+                    <span [ngClass]="{'status-completed': item.status === 'Completed', 'status-pending': item.status === 'Pending'}">
+                      {{ item.status }}
+                    </span>
+                  </td>
+                  <td>{{ item.transactionId }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="download-actions">
+            <button class="download-btn" (click)="downloadCSV()">
+              <i class="fas fa-file-csv"></i> Download CSV
+            </button>
+            <button class="download-btn" (click)="downloadPDF()">
+              <i class="fas fa-file-pdf"></i> Download PDF
+            </button>
+          </div>
+          <div *ngIf="withdrawalHistory.length === 0" class="no-items">No withdrawal history available.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="container">
+    <div class="payment">
+        <!-- Enhanced Header with Icon -->
+        <div class="header-section">
+            <i class="fas fa-credit-card icon-large"></i>
+            <h1>Payment & Finance Management</h1>
+        </div>
+        <div class="divider"></div>
+
+        <!-- Two-Column Layout (Unchanged from Previous) -->
+        <div class="two-column-layout">
+            <!-- Left Column: Bank Details -->
+            <div class="pmtBlock bank-card column">
+                <div class="card-header">
+                    <i class="fas fa-university icon-medium"></i>
+                    <h3>Bank Details</h3>
+                </div>
+                <ng-container *ngIf="vendorDetails.vendorBankDetails; else bankUnAvl">
+                    <div class="bankInfo">
+                        <div class="infoRow">
+                            <span class="label"><i class="fas fa-user icon-small"></i> Account Holder Name:</span>
+                            <span class="value">{{ vendorDetails.vendorBankDetails.accountHolderName }}</span>
+                        </div>
+                        <div class="infoRow">
+                            <span class="label"><i class="fas fa-building icon-small"></i> Bank Name:</span>
+                            <span class="value">{{ vendorDetails.vendorBankDetails.bankName }}</span>
+                        </div>
+                        <div class="infoRow">
+                            <span class="label"><i class="fas fa-credit-card icon-small"></i> Account Number:</span>
+                            <span class="value">{{ vendorDetails.vendorBankDetails.maskedAccountNumber }}</span>
+                        </div>
+                        <div class="infoRow">
+                            <span class="label"><i class="fas fa-code icon-small"></i> IFSC Code:</span>
+                            <span class="value">{{ vendorDetails.vendorBankDetails.ifscCode }}</span>
+                        </div>
+                        <div class="infoRow">
+                            <span class="label"><i class="fas fa-mobile-alt icon-small"></i> UPI ID:</span>
+                            <span class="value">{{ vendorDetails.vendorBankDetails.upiid }}</span>
+                        </div>
+                        <div class="statusRow">
+                            <span class="label"><i class="fas fa-info-circle icon-small"></i> Status:</span>
+                            <span
+                                [ngClass]="vendorDetails.vendorBankDetails.isBankVerified ? 'verified' : 'unverified'">
+                                <i *ngIf="vendorDetails.vendorBankDetails.isBankVerified"
+                                    class="fas fa-check-circle"></i>
+                                <i *ngIf="!vendorDetails.vendorBankDetails.isBankVerified"
+                                    class="fas fa-exclamation-triangle"></i>
+                                {{ vendorDetails.vendorBankDetails.isBankVerified ? 'Verified' : 'Not Verified' }}
+                            </span>
+                        </div>
+                        <div class="vendorCard">
+                            <div class="details">
+                                <h2>This is your vendor card</h2>
+                                <button>Get Your vendor card</button>
+                            </div>
+                        </div>
+                        <button class="verifyBtn" *ngIf="!vendorDetails.vendorBankDetails.isBankVerified"
+                            (click)="verifyBank()">
+                            <i class="fas fa-check"></i> Verify Bank
+                        </button>
+                    </div>
+                </ng-container>
+
+                <ng-template #bankUnAvl>
+                    <div class="bankAlert">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        You need to verify your Bank Account to proceed with withdrawals.
+                    </div>
+                </ng-template>
+            </div>
+
+            <!-- Right Column: Earnings & Withdrawal (Unchanged from Previous) -->
+            <div class="pmtBlock earnings-card column">
+                <div class="card-header">
+                    <i class="fas fa-chart-line icon-medium"></i>
+                    <h3>Earnings</h3>
+                </div>
+                <div class="earnings-info">
+                    <div class="infoRow large">
+                        <span class="label"><i class="fas fa-wallet icon-small"></i> Total Earnings:</span>
+                        <span class="value highlighted">₹ 10,000</span>
+                    </div>
+                    <div class="infoRow large">
+                        <span class="label"><i class="fas fa-money-bill-wave icon-small"></i> Available for
+                            Withdrawal:</span>
+                        <span class="value highlighted">₹ 10,000</span>
+                    </div>
+                </div>
+                <button class="withdrawBtn" [disabled]="!canWithdrawToday()" (click)="withdrawMoney()">
+                    <i class="fas fa-download"></i> Withdraw Money
+                </button>
+                <div *ngIf="!canWithdrawToday()" class="withdrawNote">
+                    <i class="fas fa-clock"></i> You can withdraw only once per day.
+                </div>
+
+                <!-- Withdrawal Limit Info -->
+                <!-- <div class="section-divider"></div>
+        <div class="limit-info">
+          <i class="fas fa-info-circle"></i>
+          <span>You can withdraw once per day. Maximum ₹50,000 per transaction.</span>
+        </div> -->
+
+                <!-- Upcoming Withdrawal Eligibility -->
+                <!-- <div class="section-divider"></div>
+        <div class="eligibility-info">
+          <i class="fas fa-calendar-alt"></i>
+          <strong>Next withdrawal available on:</strong> {{ nextWithdrawalDate }}
+        </div> -->
+
+                <!-- Pending Payouts -->
+                <div class="section-divider"></div>
+                <div class="pending-payouts">
+                    <h4><i class="fas fa-clock icon-small"></i> Pending Payouts</h4>
+                    <div *ngIf="pendingPayouts.length > 0; else noPending" class="payout-list">
+                        <div *ngFor="let payout of pendingPayouts" class="payout-item">
+                            <span class="payout-date">{{ payout.date }}</span>
+                            <span class="payout-amount">{{ payout.amount }}</span>
+                            <span class="payout-status pending">{{ payout.status }}</span>
+                        </div>
+                    </div>
+                    <ng-template #noPending>
+                        <p class="no-items">No pending payouts at the moment.</p>
+                    </ng-template>
+                </div>
+
+                <!-- Withdrawal History Section -->
+                <div class="section-divider"></div>
+                <div class="history-section">
+                    <h4><i class="fas fa-history icon-small"></i> Withdrawal History</h4>
+                    <div class="table-wrapper">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Transaction ID</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of withdrawalHistory">
+                                    <td>{{ item.date }}</td>
+                                    <td>{{ item.amount }}</td>
+                                    <td>
+                                        <span
+                                            [ngClass]="{'status-completed': item.status === 'Completed', 'status-pending': item.status === 'Pending'}">
+                                            {{ item.status }}
+                                        </span>
+                                    </td>
+                                    <td>{{ item.transactionId }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="download-actions">
+                        <button class="download-btn" (click)="downloadCSV()">
+                            <i class="fas fa-file-csv"></i> Download CSV
+                        </button>
+                        <button class="download-btn" (click)="downloadPDF()">
+                            <i class="fas fa-file-pdf"></i> Download PDF
+                        </button>
+                    </div>
+                    <div *ngIf="withdrawalHistory.length === 0" class="no-items">No withdrawal history available.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- New: Vendor Settings & Support Section (Full-Width Below Columns) -->
+        <div class="settings-section">
+            <div class="section-header">
+                <i class="fas fa-cog icon-medium"></i>
+                <h2>Vendor Settings & Support</h2>
+            </div>
+            <div class="divider"></div>
+            <div class="settings-grid">
+                <!-- Notifications & Alerts Card -->
+                <div class="settings-card">
+                    <h4><i class="fas fa-bell icon-small"></i> Notifications & Alerts</h4>
+                    <div class="toggle-group">
+                        <label class="toggle-label">
+                            <input type="checkbox" [(ngModel)]="notifications.successWithdraw"
+                                (change)="toggleNotification('successWithdraw')">
+                            <span class="toggle-switch"></span>
+                            Notify me for successful withdrawals
+                        </label>
+                        <label class="toggle-label">
+                            <input type="checkbox" [(ngModel)]="notifications.failedTx"
+                                (change)="toggleNotification('failedTx')">
+                            <span class="toggle-switch"></span>
+                            Alert me for failed transactions
+                        </label>
+                        <label class="toggle-label">
+                            <input type="checkbox" [(ngModel)]="notifications.weeklyReport"
+                                (change)="toggleNotification('weeklyReport')">
+                            <span class="toggle-switch"></span>
+                            Weekly earnings report email
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Two-Factor Authentication Card -->
+                <div class="settings-card">
+                    <h4><i class="fas fa-shield-alt icon-small"></i> Two-Factor Authentication</h4>
+                    <p class="settings-desc">Add extra security for withdrawals or bank changes.</p>
+                    <label class="toggle-label">
+                        <input type="checkbox" [(ngModel)]="twoFactorEnabled" (change)="enableTwoFactor()">
+                        <span class="toggle-switch"></span>
+                        Enable 2FA
+                    </label>
+                    <button *ngIf="!twoFactorEnabled" class="setup-btn" (click)="enableTwoFactor()">
+                        <i class="fas fa-key"></i> Set Up 2FA
+                    </button>
+                </div>
+
+                <!-- Payout Method Preferences Card -->
+                <div class="settings-card">
+                    <h4><i class="fas fa-exchange-alt icon-small"></i> Payout Method Preferences</h4>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" value="Bank" [(ngModel)]="payoutMethod">
+                            <span class="radio-custom"></span>
+                            Bank Transfer
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" value="UPI" [(ngModel)]="payoutMethod">
+                            <span class="radio-custom"></span>
+                            UPI Transfer
+                        </label>
+                    </div>
+                    <button class="save-btn" (click)="savePayoutMethod()">
+                        <i class="fas fa-save"></i> Save Preference
+                    </button>
+                </div>
+
+                <!-- Tax / Invoice Section Card -->
+                <div class="settings-card">
+                    <h4><i class="fas fa-file-invoice icon-small"></i> Tax / Invoice</h4>
+                    <p class="settings-desc">Download your monthly invoices or GST reports.</p>
+                    <div class="download-actions invoice-downloads">
+                        <button class="download-btn small" (click)="downloadMonthlyInvoice()">
+                            <i class="fas fa-file-invoice-dollar"></i> Monthly Invoice
+                        </button>
+                        <button class="download-btn small" (click)="downloadGSTReport()">
+                            <i class="fas fa-file-alt"></i> GST Report
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Support & Dispute Management Card -->
+                <div class="settings-card full-span">
+                    <h4><i class="fas fa-headset icon-small"></i> Support & Dispute Management</h4>
+                    <p class="settings-desc">Need help? Get in touch with our team.</p>
+                    <div class="support-actions">
+                        <button class="support-btn issue" (click)="reportIssue()">
+                            <i class="fas fa-exclamation-circle"></i> Report Payment Issue
+                        </button>
+                        <button class="support-btn contact" (click)="contactSupport()">
+                            <i class="fas fa-envelope"></i> Contact Support
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
