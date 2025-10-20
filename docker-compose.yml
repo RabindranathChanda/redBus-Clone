@@ -1,0 +1,66 @@
+services:
+  # SQL Server Container
+  redbus-db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: redbus-db
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "${DB_PASSWORD}"
+    healthcheck:
+      test: ["CMD-SHELL", "timeout 5 bash -c '</dev/tcp/localhost/1433'"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    ports:
+      - "1433:1433"
+    volumes:
+      - redbus-data:/var/opt/mssql
+    restart: unless-stopped
+
+  # ASP.NET Core API Container
+  redbus-api:
+    build:
+      context: ./redBus-api
+      dockerfile: redBus-api/Dockerfile
+    image: redbusapi:latest
+    container_name: redbus-api
+    ports:
+      - "8080:8080"   # HTTP
+      - "8081:8081"   # HTTPS
+    depends_on:
+      redbus-db:
+        condition: service_healthy
+    environment:
+      #  ASP.NET Core URLs
+      ASPNETCORE_URLS: "http://+:8080;https://+:8081"
+
+      #  HTTPS Certificate
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/app/certs/redbus.pfx"
+      ASPNETCORE_Kestrel__Certificates__Default__Password: "${CERT_PASSWORD}"
+
+      #  Database Connection
+      ConnectionStrings__DBConnection: "Server=${DB_SERVER};Database=${DB_NAME};User Id=${DB_USER};Password=${DB_PASSWORD};TrustServerCertificate=True;Encrypt=False;" 
+
+      #  JWT Configuration
+      Jwt__Key: "${JWT_KEY}"
+      Jwt__Issuer: "${JWT_ISSUER}"
+      Jwt__Audience: "${JWT_AUDIENCE}"
+
+      #  Mail Service
+      Email__Username: "${EMAIL_USERNAME}"
+      Email__Password: "${EMAIL_PASSWORD}"
+
+      #  Google reCAPTCHA v3
+      reCaptchaSettings__SiteKey: "${RECAPTCHA_SITE_KEY}"
+      reCaptchaSettings__SecretKey: "${RECAPTCHA_SECRET_KEY}"
+
+      # Force the api to use HTTPS
+      DOTNET_RUNNING_IN_CONTAINER: "true"
+
+    volumes:
+      - ./redBus-api/certs:/app/certs
+    restart: unless-stopped
+
+volumes:
+  redbus-data:

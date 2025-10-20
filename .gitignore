@@ -1,5 +1,6 @@
 # === ASP.NET Core (redBus-api) ===
 redBus-api/**/bin/
+.redBus-api/certs/
 redBus-api/**/obj/
 redBus-api/**/Debug/
 redBus-api/**/*.user
@@ -8,6 +9,7 @@ redBus-api/**/*.pdb
 redBus-api/**/*.log
 .redBus-api/.vs/
 *.db
+.env
 
 # === Angular (redBus_App) ===
 redBus_App/node_modules/

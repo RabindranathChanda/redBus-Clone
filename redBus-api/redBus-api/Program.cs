@@ -75,10 +75,23 @@ builder.Services.AddHttpClient<IGoogleCaptchaService, GoogleCaptchaService>();
 builder.Services.AddScoped<redBus_api.ServiceClasses.IAuthenticationService, redBus_api.ServiceClasses.AuthenticationService>();
 
 
-
-
-
 var app = builder.Build();
+
+// --- Auto-migrate the database on startup ---
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<redBusDBContext>();
+        context.Database.Migrate(); // This will create DB if it doesn't exist and apply migrations
+        Console.WriteLine("Database migration applied successfully!");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Error applying database migrations: " + ex.Message);
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -13,13 +13,27 @@
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                using (var scope = _serviceProvider.CreateScope())
+                try
                 {
-                    var blacklistStore = scope.ServiceProvider.GetRequiredService<ResetTokenBlacklistStore>();
-                    blacklistStore.CleanupExpiredTokens();
-                }
+                    using (var scope = _serviceProvider.CreateScope())
+                    {
+                        var blacklistStore = scope.ServiceProvider.GetRequiredService<ResetTokenBlacklistStore>();
+                        blacklistStore.CleanupExpiredTokens();
+                    }
 
-                await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken); // Run every 5 mins
+                    // Delay with cancellation support
+                    await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken);
+                }
+                catch (TaskCanceledException)
+                {
+                    // This happens when the host is shutting down
+                    // Safe to ignore
+                }
+                catch (Exception ex)
+                {
+                    // Optional: log unexpected errors
+                    Console.WriteLine($"Error in ExpiredResetTokenCleaningService: {ex.Message}");
+                }
             }
         }
     }
