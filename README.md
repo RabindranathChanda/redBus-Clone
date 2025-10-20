@@ -4,8 +4,10 @@ A full-featured **bus booking web application** inspired by the redBus platform,
 This project replicates real-world booking functionalities with a **responsive UI**, **secure authentication**, and **role-based access** for users and vendors.
 
 ```
-    ⚠️ This project is under development.
-```
+
+⚠️ This project is under development.
+
+````
 ---
 
 ## 🔑 Key Features
@@ -13,19 +15,23 @@ This project replicates real-world booking functionalities with a **responsive U
 ### 👥 User & Vendor Authentication
 - JWT-based login with **access and refresh token system**  
 - **Role-based access control** for users and vendors  
-- Session validation to prevent multiple logins with the same refresh token  
+- **Prevention of multiple logins** with the same refresh token  
+- Session validation for enhanced security  
 - **Google reCAPTCHA v3** integration for bot protection on login and signup  
 
 ### 🚌 Booking Management
 - Smart booking form with **date/time pickers** and **dynamic dropdowns** for route selection  
 - **Real-time fare calculation** and seat availability tracking  
+- Popup booking form with **auto-filled room/bus details** for faster booking  
 
-### 🧩 Vendor Dashboard
+### 🧩 Vendor Dashboard & Settings
 - Vendors can **list buses**, manage schedules, and view bookings  
-- Includes **form validation**, error handling, and toast notifications for user feedback  
+- **Payment & finance management**: total earnings overview and **withdrawal system** (once per day)  
+- **Reusable settings UI** with error handling and toast notifications  
+- Includes **form validation**, feedback messages, and responsive design  
 
 ### 🗄️ Database Integration
-- Entity Framework models and DbContext for **Users, Buses, Bookings, and Transactions**  
+- Entity Framework models and DbContext. 
 - Support for MSSQL with migration and database import options  
 
 ### 📬 Email Notification System
@@ -43,6 +49,7 @@ This project replicates real-world booking functionalities with a **responsive U
 | **Database** | Microsoft SQL Server (MSSQL) |
 | **Security** | JWT Authentication, Google reCAPTCHA v3 |
 | **Email Service** | Google SMTP |
+| **Containerization** | Docker (backend ready for containerization) |
 
 ---
 
@@ -58,7 +65,7 @@ ng serve
 > **Note:**
 >
 > * Update the `apiURL` in `src/environments/environment.ts` & `src/environments/environment.development.ts` with your backend API endpoint.
-> * Add your **Google reCAPTCHA v3 site key** in both the environment file as:
+> * Add your **Google reCAPTCHA v3 site key** in both environment files as:
 >
 >   ```typescript
 >   export const environment = {
@@ -100,6 +107,15 @@ Open `redBus-api.sln` in **Visual Studio 2022** and build the project.
 >   }
 >   ```
 >
+> * Add **Jwt Configuration** as you want:
+>
+>   ```json
+>   "Jwt": {
+>     "Key": "redBus-Api-Super-Secret-Key-rabindra",
+>     "Issuer": "redBus_Api",
+>     "Audience": "redBus_Client"
+>   }
+>   ```
 > * Add your **Google reCAPTCHA site key and secret key**:
 >
 >   ```json
@@ -110,6 +126,8 @@ Open `redBus-api.sln` in **Visual Studio 2022** and build the project.
 >   ```
 >
 > * The backend validates reCAPTCHA tokens on login and signup endpoints for bot prevention.
+>
+> * The backend supports **Docker-based containerization**; ensure environment variables like `DB_PASSWORD` and `EMAIL_USERNAME` are set in your Docker setup.
 
 ---
 
@@ -132,14 +150,40 @@ Update-Database
 
 ---
 
+## 🐳 Docker Setup
+
+
+#### ⚠️ Frontend is under development
+
+### Backend Setup
+>   ```json
+>       cd redBus-Clone
+>   ```
+> *   On Windows run build.ps1 script, it will handle everything.
+>   ```json
+>       .\build.ps1
+>   ```
+> *   On Linux/MacOS run build.sh script, it will handle everything.
+>   ```json
+>       chmod +x ./build.sh
+>       .\build.sh
+>   ```
+> *   Stop running containers
+>   ```json
+>       docker compose down -v
+>   ```
+---
+
 ## 🧩 Project Highlights
 
 * ✅ Clean architecture with separation of concerns
-* 🔒 Secure JWT & refresh token flow
+* 🔒 Secure JWT & refresh token flow with **single-session enforcement**
 * 🧠 Google reCAPTCHA v3 integration for advanced bot protection
-* 🌗 Responsive UI with dark mode
-* 📧 SMTP-based email system
-* 💬 Real-time feedback and validation
+* 🌗 Responsive Angular UI with dark mode support
+* 💰 Vendor payment management and **withdrawal system**
+* 📧 SMTP-based email system for booking confirmations
+* 💬 Real-time feedback, reusable components, and toast notifications
+* 🐳 Backend ready for Docker containerization
 
 ---
 
