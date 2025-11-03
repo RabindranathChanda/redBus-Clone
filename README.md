@@ -152,10 +152,6 @@ Update-Database
 
 ## 🐳 Docker Setup
 
-
-#### ⚠️ Frontend is under development
-
-### Backend Setup
 >   ```json
 >       cd redBus-Clone
 >   ```

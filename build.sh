@@ -58,6 +58,7 @@ read -p "Enter Common Name (e.g., your domain or 'localhost') [localhost]: " CN
 CN=${CN:-localhost}
 echo
 
+
 # -----------------------------
 # 3️⃣ Create certificate if missing
 # -----------------------------
@@ -79,6 +80,47 @@ if [ ! -f "$CERT_FILE" ]; then
   echo "Certificate generated successfully."
 fi
 echo
+
+
+# ==========================================================
+# 🔒 Generate Nginx self-signed certificate (Linux version)
+# ==========================================================
+CERT_NAME="redbus.local"
+CERT_DIR_NGINX="./redBus_App/nginx/certs"
+
+echo "=== Nginx HTTPS Setup ==="
+read -sp "Enter a password for the Frontend HTTPS certificate: " FRONTEND_CERT_PASSWORD
+echo
+
+mkdir -p "$CERT_DIR_NGINX"
+
+CERT_PATH="$CERT_DIR_NGINX/$CERT_NAME.crt"
+KEY_PATH="$CERT_DIR_NGINX/$CERT_NAME.key"
+PFX_PATH="$CERT_DIR_NGINX/$CERT_NAME.pfx"
+
+echo
+echo "Generating self-signed HTTPS certificate for localhost (frontend)..."
+
+# Generate a new self-signed cert and key for Nginx frontend
+openssl req -x509 -newkey rsa:2048 -sha256 -days 730 \
+  -nodes \
+  -keyout "$KEY_PATH" \
+  -out "$CERT_PATH" \
+  -subj "/CN=localhost" >/dev/null 2>&1
+
+# Export as PFX for reference (similar to PowerShell Export-PfxCertificate)
+openssl pkcs12 -export \
+  -inkey "$KEY_PATH" \
+  -in "$CERT_PATH" \
+  -out "$PFX_PATH" \
+  -passout pass:"$FRONTEND_CERT_PASSWORD"
+
+echo "Frontend self-signed certificate generated successfully:"
+echo "$KEY_PATH"
+echo "$CERT_PATH"
+echo "$PFX_PATH"
+echo
+
 
 # -----------------------------
 # 4️⃣ Write .env file dynamically

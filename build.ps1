@@ -78,12 +78,6 @@ $certPath = Join-Path $CertDir "$CertName.crt"
 $keyPath  = Join-Path $CertDir "$CertName.key"
 $pfxPath  = Join-Path $CertDir "$CertName.pfx"
 
-# Skip if already exists
-# if ((Test-Path $certPath) -and (Test-Path $keyPath)) {
-#     Write-Host "Nginx certificate already exists. Skipping generation.`n"
-#     return
-# }
-
 Write-Host "`nGenerating self-signed HTTPS certificate for localhost..."
 
 # Create a temporary self-signed certificate
@@ -143,7 +137,6 @@ Write-Host "`n.env file created successfully!"
 $env:CERT_PASSWORD = $PlainCertPassword
 Write-Host "Building and starting containers..."
 docker-compose down -v
-# docker-compose --env-file "./redBus-api/.env" up --build -d
 docker-compose up --build -d
 
 Write-Host "`n Setup complete! API is now running with HTTPS enabled."
