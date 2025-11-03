@@ -63,7 +63,7 @@ builder.Services.AddAuthorization();
 // Config For CORS Policy
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", builder => builder.WithOrigins("http://localhost:4200").AllowCredentials().AllowAnyMethod().AllowAnyHeader());
+    options.AddPolicy("AllowAll", builder => builder.WithOrigins("http://localhost:4200", "https://localhost", "https://redbus-frontend", "http://redbus-frontend").AllowCredentials().AllowAnyMethod().AllowAnyHeader());
 
 
 });
@@ -100,8 +100,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowAll");
 app.UseHttpsRedirection();
+app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

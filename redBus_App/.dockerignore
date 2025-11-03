@@ -1,0 +1,66 @@
+# ----------------------------
+# 🔹 Node & Dependency Folders
+# ----------------------------
+node_modules
+bower_components
+jspm_packages
+
+# ----------------------------
+# 🔹 Environment & Config Files
+# ----------------------------
+*.env
+.env.*
+!.env.example
+
+# ----------------------------
+# 🔹 Build Artifacts
+# ----------------------------
+dist
+build
+tmp
+temp
+out-tsc
+coverage
+
+# ----------------------------
+# 🔹 Logs & System Files
+# ----------------------------
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+.DS_Store
+Thumbs.db
+
+# ----------------------------
+# 🔹 IDE / Editor Settings
+# ----------------------------
+.vscode
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.user
+
+# ----------------------------
+# 🔹 Git & Metadata
+# ----------------------------
+.git
+.gitignore
+.gitattributes
+
+# ----------------------------
+# 🔹 Docker Files (not needed in build context)
+# ----------------------------
+Dockerfile
+docker-compose.yml
+
+# ----------------------------
+# 🔹 Misc
+# ----------------------------
+*.bak
+*.tmp
+*.old

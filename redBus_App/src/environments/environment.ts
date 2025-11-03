@@ -48,9 +48,18 @@ export const environment = {
             linkedin: 'https://www.linkedin.com/company/redbus/',
         }
     },
-    apiUrl: 'https://localhost:7042/api',
-    reCaptchaSettings: {
-
-        "SiteKey": "Your Site Key"
+    // apiUrl: 'https://localhost:7042/api',
+    get apiUrl() {
+        const url = (window as any)['__env']?.apiUrl;
+        if (!url) throw new Error('Runtime environment variable API_URL is missing!');
+        return url;
+    },
+    // reCaptchaSettings: {
+    //     "SiteKey": "Your Site Key"
+    // }
+    get reCaptchaSettings() {
+        const key = (window as any)['__env']?.reCaptchaSiteKey;
+        if (!key) throw new Error('Runtime environment variable RECAPTCHA_SITE_KEY is missing!');
+        return { SiteKey: key };
     }
 };

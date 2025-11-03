@@ -60,6 +60,62 @@ if (-not (Test-Path $CERT_FILE)) {
     Write-Host "`nCertificate generated successfully."
 }
 
+
+# -----------------------------
+# 🔒 Generate Nginx self-signed certificate (with OpenSSL)
+# -----------------------------
+$CertName = "redbus.local"
+$CertDir = ".\redBus_App\nginx\certs"
+$FRONTEND_CERT_PASSWORD = Read-Host -AsSecureString "Enter a password for the Frontend HTTPS certificate"
+
+# Ensure directory exists
+if (-not (Test-Path $CertDir)) {
+    New-Item -ItemType Directory -Path $CertDir | Out-Null
+}
+
+# Paths
+$certPath = Join-Path $CertDir "$CertName.crt"
+$keyPath  = Join-Path $CertDir "$CertName.key"
+$pfxPath  = Join-Path $CertDir "$CertName.pfx"
+
+# Skip if already exists
+# if ((Test-Path $certPath) -and (Test-Path $keyPath)) {
+#     Write-Host "Nginx certificate already exists. Skipping generation.`n"
+#     return
+# }
+
+Write-Host "`nGenerating self-signed HTTPS certificate for localhost..."
+
+# Create a temporary self-signed certificate
+$cert = New-SelfSignedCertificate `
+    -DnsName "localhost" `
+    -CertStoreLocation "Cert:\CurrentUser\My" `
+    -FriendlyName "redbus.local self-signed" `
+    -KeyExportPolicy Exportable `
+    -KeySpec Signature `
+    -NotAfter (Get-Date).AddYears(2)
+
+# Convert SecureString password to plain text for OpenSSL
+$BSTR = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($FRONTEND_CERT_PASSWORD)
+$plainPassword = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)
+
+# Export .pfx (for reference)
+Export-PfxCertificate -Cert $cert -FilePath $pfxPath -Password $FRONTEND_CERT_PASSWORD | Out-Null
+
+# Use OpenSSL to extract .key and .crt
+if (Get-Command openssl -ErrorAction SilentlyContinue) {
+    Write-Host "OpenSSL found. Exporting .crt and .key..."
+    # Extract private key
+    openssl pkcs12 -in $pfxPath -nocerts -nodes -passin pass:$plainPassword -out $keyPath
+    # Extract certificate
+    openssl pkcs12 -in $pfxPath -clcerts -nokeys -passin pass:$plainPassword -out $certPath
+    Write-Host "Self-signed certificate and private key generated successfully:`n$certPath`n$keyPath`n"
+} else {
+    Write-Warning "OpenSSL not found. Only .pfx and .crt exported. .key cannot be generated without OpenSSL."
+    Export-Certificate -Cert $cert -FilePath $certPath | Out-Null
+}
+
+
 # -----------------------------
 # 4️⃣ Write .env file dynamically
 # -----------------------------

@@ -14,6 +14,8 @@ services:
       start_period: 20s
     ports:
       - "1433:1433"
+    networks:
+      - redbus-net
     volumes:
       - redbus-data:/var/opt/mssql
     restart: unless-stopped
@@ -26,8 +28,8 @@ services:
     image: redbusapi:latest
     container_name: redbus-api
     ports:
-      - "8080:8080"   # HTTP
-      - "8081:8081"   # HTTPS
+      - "8080:8080" # HTTP
+      - "8081:8081" # HTTPS
     depends_on:
       redbus-db:
         condition: service_healthy
@@ -40,7 +42,7 @@ services:
       ASPNETCORE_Kestrel__Certificates__Default__Password: "${CERT_PASSWORD}"
 
       #  Database Connection
-      ConnectionStrings__DBConnection: "Server=${DB_SERVER};Database=${DB_NAME};User Id=${DB_USER};Password=${DB_PASSWORD};TrustServerCertificate=True;Encrypt=False;" 
+      ConnectionStrings__DBConnection: "Server=${DB_SERVER};Database=${DB_NAME};User Id=${DB_USER};Password=${DB_PASSWORD};TrustServerCertificate=True;Encrypt=False;"
 
       #  JWT Configuration
       Jwt__Key: "${JWT_KEY}"
@@ -57,10 +59,33 @@ services:
 
       # Force the api to use HTTPS
       DOTNET_RUNNING_IN_CONTAINER: "true"
-
+    networks:
+      - redbus-net
     volumes:
       - ./redBus-api/certs:/app/certs
     restart: unless-stopped
+    
+  # Angular Frontend Container
+  redbus-frontend:
+    build:
+      context: ./redBus_App
+      dockerfile: Dockerfile
+    image: redbus-frontend:latest
+    container_name: redbus-frontend
+    ports:
+      - "443:443"
+    depends_on:
+      - redbus-api
+    environment:
+      API_URL: "https://localhost:8081/api"
+      RECAPTCHA_SITE_KEY: "${RECAPTCHA_SITE_KEY}"
+    networks:
+      - redbus-net
+    restart: unless-stopped
+
+networks:
+  redbus-net:
+    driver: bridge
 
 volumes:
   redbus-data:

@@ -14,6 +14,7 @@ redBus-api/**/*.log
 # === Angular (redBus_App) ===
 redBus_App/node_modules/
 redBus_App/dist/
+redBus_App/nginx/
 redBus_App/.angular/
 redBus_App/.vscode/
 redBus_App/package-lock.json
