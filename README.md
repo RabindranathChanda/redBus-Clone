@@ -151,7 +151,7 @@ Update-Database
 ---
 
 ## 🐳 Docker Setup
-
+#### Database setup is not required for the docker setup. the Docker-Compose will take care of all things.
 >   ```json
 >       cd redBus-Clone
 >   ```
