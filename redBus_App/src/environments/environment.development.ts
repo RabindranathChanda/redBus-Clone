@@ -51,8 +51,8 @@ export const environment = {
     // apiUrl: 'https://localhost:7042/api',
     get apiUrl() {
         const url = (window as any)['__env']?.apiUrl;
-        if (!url) throw new Error('Runtime environment variable API_URL is missing!');
-        return url;
+        if (!url) throw new Error('Runtime environment variable API_URL is missing!, Using development API_URL: https://localhost:7042/api');
+        return url || 'https://localhost:7042/api';
     },
 
     // reCaptchaSettings: {
@@ -60,7 +60,7 @@ export const environment = {
     // }
     get reCaptchaSettings() {
         const key = (window as any)['__env']?.reCaptchaSiteKey;
-        if (!key) throw new Error('Runtime environment variable RECAPTCHA_SITE_KEY is missing!');
+        if (!key) throw new Error('Runtime environment variable RECAPTCHA_SITE_KEY is missing!, Please set the reCaptchaSiteKey');
         return { SiteKey: key };
     }
 };
