@@ -121,11 +121,15 @@ echo "$CERT_PATH"
 echo "$PFX_PATH"
 echo
 
+# Setup APPDATA for Linux
+APPDATA="$HOME"
+
+
 
 # -----------------------------
 # 4️⃣ Write .env file dynamically
 # -----------------------------
-cat > ./redBus-api/.env <<EOF
+cat > .env <<EOF
 DB_SERVER=$DB_SERVER
 DB_NAME=$DB_NAME
 DB_USER=$DB_USER
@@ -137,6 +141,7 @@ EMAIL_USERNAME=$EMAIL_USERNAME
 EMAIL_PASSWORD=$EMAIL_PASSWORD
 RECAPTCHA_SITE_KEY=$RECAPTCHA_SITE_KEY
 RECAPTCHA_SECRET_KEY=$RECAPTCHA_SECRET_KEY
+APPDATA=$APPDATA
 EOF
 
 echo ".env file created successfully! ✅"
@@ -147,8 +152,8 @@ echo
 # -----------------------------
 export CERT_PASSWORD="$CERT_PASSWORD"
 echo "🚀 Building and starting Docker containers..."
-docker-compose down -v
-docker-compose up --build -d
+docker compose down -v
+docker compose up --build -d
 
 echo
 echo "✅ Setup complete! API is now running with HTTPS enabled."
