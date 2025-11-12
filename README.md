@@ -5,7 +5,8 @@ This project replicates real-world booking functionalities with a **responsive U
 
 ```
 
-⚠️ This project is under development.
+⚠️ Note: This project is licensed under MIT for educational and demonstration purposes.
+Proper credit to the original author (Rabindranath Chanda) is required when reusing or redistributing this code.
 
 ````
 ---
@@ -185,6 +186,6 @@ Update-Database
 
 ## 🧑‍💻 Author
 
-**Rabindranath Chanda**
+**Rabindra Nath Chanda**
 .NET & Angular Developer
 📍 Kolkata, India
