@@ -6,7 +6,8 @@ This project replicates real-world booking functionalities with a **responsive U
 ```
 
 ⚠️ Note: This project is licensed under MIT for educational and demonstration purposes.
-Proper credit to the original author (Rabindranath Chanda) is required when reusing or redistributing this code.
+Proper credit to the original author (Rabindra Nath Chanda) is required when reusing or 
+redistributing this code.
 
 ````
 ---
