@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using redBus_api.Data;
 using redBus_api.Mappings;
+using redBus_api.Model;
 using redBus_api.ServiceClasses;
 using System.Text;
 
@@ -86,6 +87,24 @@ using (var scope = app.Services.CreateScope())
         var context = services.GetRequiredService<redBusDBContext>();
         context.Database.Migrate(); // This will create DB if it doesn't exist and apply migrations
         Console.WriteLine("Database migration applied successfully!");
+
+        // Insert some dummy locations.
+        if (!context.Location.Any())
+        {
+            context.Location.AddRange(
+                new Location { LocationName = "Kolkata", LocationSub = "WestBengal, India", LocationCode = "KOL", LocationType = "City" },
+                new Location { LocationName = "Lucknow", LocationSub = "Uttar Pradesh, India", LocationCode = "LKO", LocationType = "Urban" },
+                new Location { LocationName = "Hydrabad", LocationSub = "Telangana, India", LocationCode = "HYD", LocationType = "City" },
+                new Location { LocationName = "Bangalore", LocationSub = "Karnataka, India", LocationCode = "BLR", LocationType = "Urban" }
+            );
+
+            context.SaveChanges();
+            Console.WriteLine("Inserted test location data.");
+        }
+        else
+        {
+            Console.WriteLine("Location table already contains data. Skipping insert.");
+        }
     }
     catch (Exception ex)
     {
