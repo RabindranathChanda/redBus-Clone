@@ -51,7 +51,7 @@ redistributing this code.
 | **Database** | Microsoft SQL Server (MSSQL) |
 | **Security** | JWT Authentication, Google reCAPTCHA v3 |
 | **Email Service** | Google SMTP |
-| **Containerization** | Docker (backend ready for containerization) |
+| **Containerization** | Docker |
 
 ---
 
