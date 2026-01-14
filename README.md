@@ -1,4 +1,5 @@
 # 🚍 redBus Clone – Full-Stack Bus Booking Web Application
+**⚠️ This Project is strictly under development**
 
 A full-featured **bus booking web application** inspired by the redBus platform, built with **ASP.NET Core Web API** (backend) and **Angular 19** (frontend).  
 This project replicates real-world booking functionalities with a **responsive UI**, **secure authentication**, and **role-based access** for users and vendors.
